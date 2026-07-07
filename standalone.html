@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SORA — Tokyo Soul, City Nights</title>
+<meta name="description" content="SORA — a modern high-end Japanese restaurant in Lower Manhattan. Demo homepage in four design styles." />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* =====================================================================
+   SORA — Four-theme restaurant demo
+   Themes are body classes: .theme-editorial .theme-minimalist
+                            .theme-illustrative .theme-bento
+   All visual design flows from CSS variables scoped to those classes.
+   ===================================================================== */
+
+/* ---------- Reset / base ---------- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:none}
+a{color:inherit;text-decoration:none}
+input{font:inherit}
+ul{list-style:none}
+
+:root{
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --nav-h:74px;
+}
+
+body{
+  font-family:var(--font-body,'Inter',sans-serif);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  overflow-x:hidden;
+  transition:background-color .3s var(--ease), color .3s var(--ease);
+}
+
+/* ================================================================
+   THEME TOKENS
+   ================================================================ */
+
+/* ---- Editorial (default) ---- */
+.theme-editorial{
+  --bg:#0b0b0c; --bg-alt:#121215; --surface:#161519; --surface-2:#1d1c21;
+  --text:#f2efe9; --text-soft:#a49f95; --text-faint:#6f6a61;
+  --accent:#b23a2e; --accent-2:#8f2a20; --accent-ink:#f2efe9;
+  --border:rgba(242,239,233,.14); --border-strong:rgba(242,239,233,.28);
+  --radius:0px; --radius-lg:0px; --btn-radius:0px;
+  --maxw:1220px; --gutter:clamp(20px,5vw,72px); --section-pad:clamp(80px,11vw,140px);
+  --font-display:'Cormorant Garamond',serif; --font-body:'Inter',sans-serif;
+  --h-transform:uppercase; --h-spacing:.24em; --h-weight:400; --h-lh:1.05;
+  --eyebrow-spacing:.42em;
+  --shadow:0 30px 80px -40px rgba(0,0,0,.9);
+}
+
+/* ---- Minimalist ---- */
+.theme-minimalist{
+  --bg:#faf9f6; --bg-alt:#ffffff; --surface:#ffffff; --surface-2:#f2f0ea;
+  --text:#1c1b19; --text-soft:#6b6960; --text-faint:#a09d93;
+  --accent:#3a3f35; --accent-2:#242621; --accent-ink:#faf9f6;
+  --border:rgba(28,27,25,.13); --border-strong:rgba(28,27,25,.28);
+  --radius:2px; --radius-lg:4px; --btn-radius:40px;
+  --maxw:1120px; --gutter:clamp(22px,6vw,96px); --section-pad:clamp(96px,13vw,168px);
+  --font-display:'EB Garamond',serif; --font-body:'Inter',sans-serif;
+  --h-transform:none; --h-spacing:.005em; --h-weight:500; --h-lh:1.1;
+  --eyebrow-spacing:.28em;
+  --shadow:0 24px 60px -40px rgba(28,27,25,.35);
+}
+
+/* ---- Illustrative ---- */
+.theme-illustrative{
+  --bg:#f6eedd; --bg-alt:#efe3c9; --surface:#fbf5e7; --surface-2:#f0e6cf;
+  --text:#20211c; --text-soft:#5c5647; --text-faint:#8c8570;
+  --accent:#c25a3a; --accent-2:#2e4034; --accent-3:#d8a24a; --accent-ink:#fbf5e7;
+  --border:rgba(32,33,28,.18); --border-strong:rgba(32,33,28,.4);
+  --radius:16px; --radius-lg:26px; --btn-radius:999px;
+  --maxw:1180px; --gutter:clamp(22px,5.5vw,80px); --section-pad:clamp(84px,11vw,132px);
+  --font-display:'Playfair Display',serif; --font-body:'EB Garamond',serif; --font-hand:'Caveat',cursive;
+  --h-transform:none; --h-spacing:0; --h-weight:700; --h-lh:1.06;
+  --eyebrow-spacing:.22em;
+  --shadow:0 26px 50px -30px rgba(88,54,30,.4);
+}
+
+/* ---- Bento ---- */
+.theme-bento{
+  --bg:#f2f2f4; --bg-alt:#ffffff; --surface:#ffffff; --surface-2:#ececed;
+  --text:#111113; --text-soft:#6e6e73; --text-faint:#a1a1a6;
+  --accent:#0071e3; --accent-2:#c8322a; --accent-3:#1d1d1f; --accent-ink:#ffffff;
+  --border:rgba(0,0,0,.08); --border-strong:rgba(0,0,0,.16);
+  --radius:24px; --radius-lg:28px; --btn-radius:980px;
+  --maxw:1220px; --gutter:clamp(16px,3.5vw,40px); --section-pad:0px;
+  --bento-gap:clamp(12px,1.4vw,18px);
+  --font-display:'Inter',sans-serif; --font-body:'Inter',sans-serif;
+  --h-transform:none; --h-spacing:-.02em; --h-weight:700; --h-lh:1.05;
+  --eyebrow-spacing:.02em;
+  --shadow:0 4px 24px rgba(0,0,0,.06);
+}
+
+/* ================================================================
+   SHARED PRIMITIVES
+   ================================================================ */
+h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height:var(--h-lh);letter-spacing:var(--h-spacing);text-transform:var(--h-transform)}
+
+.eyebrow{
+  font-family:var(--font-body);
+  font-size:clamp(10px,1vw,12px);
+  letter-spacing:var(--eyebrow-spacing);
+  text-transform:uppercase;
+  font-weight:500;
+  color:var(--accent);
+}
+.theme-editorial .eyebrow,.theme-minimalist .eyebrow{color:var(--text-soft)}
+.theme-editorial .eyebrow{color:var(--accent)}
+
+.section-head{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter) clamp(28px,4vw,52px);text-align:center}
+.section-head h2{font-size:clamp(30px,4.4vw,58px);margin-top:12px}
+.section-head .eyebrow{display:inline-block;margin-bottom:6px}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5em;
+  font-family:var(--font-body);
+  font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  padding:15px 30px;border:1px solid transparent;border-radius:var(--btn-radius);
+  transition:all .25s var(--ease);white-space:nowrap;
+}
+.btn-primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn-primary:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--border-strong)}
+.btn-ghost:hover{background:var(--text);color:var(--bg)}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+
+/* section base spacing */
+.section{padding-top:var(--section-pad);padding-bottom:var(--section-pad);position:relative}
+
+/* Illustrative-only decorative SVGs are hidden elsewhere */
+.illus{display:none}
+.theme-illustrative .illus{display:block}
+
+/* ================================================================
+   HEADER / NAV
+   ================================================================ */
+.site-header{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  height:var(--nav-h);
+  display:flex;align-items:center;
+  transition:background-color .35s var(--ease),backdrop-filter .35s,border-color .35s,height .35s;
+  border-bottom:1px solid transparent;
+}
+.header-inner{
+  width:100%;max-width:1400px;margin:0 auto;padding:0 clamp(18px,4vw,44px);
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.wordmark{
+  font-family:var(--font-display);
+  font-size:clamp(20px,2.2vw,26px);font-weight:600;
+  letter-spacing:.34em;text-transform:uppercase;
+  padding-left:.34em;
+}
+.theme-bento .wordmark{letter-spacing:.14em;font-weight:800}
+.theme-illustrative .wordmark{letter-spacing:.14em}
+.nav{display:flex;align-items:center;gap:clamp(14px,1.8vw,30px)}
+.nav a:not(.btn){
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  color:var(--text);opacity:.82;transition:opacity .2s,color .2s;position:relative;
+}
+.theme-bento .nav a:not(.btn){letter-spacing:.01em;text-transform:none;font-size:14px;opacity:.9}
+.theme-illustrative .nav a:not(.btn){letter-spacing:.08em;text-transform:none;font-size:15px}
+.nav a:not(.btn):hover{opacity:1;color:var(--accent)}
+.nav-utility{font-size:11px !important;opacity:.55 !important}
+.nav .btn{padding:11px 22px}
+.theme-bento .nav .btn{padding:9px 18px;letter-spacing:0;text-transform:none;font-size:14px}
+
+/* header background once scrolled */
+.site-header.scrolled{
+  height:64px;
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:blur(14px) saturate(1.2);
+  -webkit-backdrop-filter:blur(14px) saturate(1.2);
+  border-color:var(--border);
+}
+.theme-editorial .site-header.scrolled{background:rgba(11,11,12,.72)}
+
+.hamburger{display:none;width:42px;height:42px;flex-direction:column;justify-content:center;gap:5px;align-items:center}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--text);transition:transform .3s,opacity .3s}
+.nav-open .hamburger span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-open .hamburger span:nth-child(2){opacity:0}
+.nav-open .hamburger span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ================================================================
+   HERO
+   ================================================================ */
+.hero{
+  min-height:100vh;min-height:100svh;
+  padding-top:var(--nav-h);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;text-align:center;
+}
+.hero-media{position:absolute;inset:0;z-index:0}
+.hero-media img{width:100%;height:100%;object-fit:cover}
+.hero-media::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(8,8,9,.55) 0%,rgba(8,8,9,.25) 40%,rgba(8,8,9,.8) 100%);}
+.hero-inner{position:relative;z-index:2;max-width:900px;padding:40px var(--gutter)}
+.hero .eyebrow{color:#e9e4da;opacity:.9;margin-bottom:22px}
+.hero-title{
+  font-family:var(--font-display);
+  font-size:clamp(52px,11vw,150px);
+  line-height:.98;color:#fff;
+  text-transform:var(--h-transform);letter-spacing:var(--h-spacing);
+  font-weight:var(--h-weight);
+  text-shadow:0 4px 40px rgba(0,0,0,.4);
+}
+.hero-welcome{
+  margin-top:26px;color:#f2efe9;
+  font-size:13px;letter-spacing:.4em;text-transform:uppercase;font-weight:500;opacity:.9;
+}
+.hero-cta{margin-top:40px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.55)}
+.hero .btn-ghost:hover{background:#fff;color:#111}
+.hero-illus{position:absolute;inset:0;z-index:1;pointer-events:none}
+
+.scroll-chev{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;
+  color:#fff;opacity:.85;animation:bob 2.2s var(--ease) infinite;
+}
+.scroll-chev svg{width:26px;height:26px}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+
+/* ================================================================
+   GALLERY (carousel)
+   ================================================================ */
+.carousel{position:relative;max-width:1560px;margin:0 auto;padding:0 clamp(12px,3vw,44px)}
+.carousel-track{
+  display:flex;gap:16px;overflow-x:auto;scroll-behavior:smooth;
+  scroll-snap-type:x mandatory;padding:8px 4px 20px;
+  scrollbar-width:none;cursor:grab;
+}
+.carousel-track::-webkit-scrollbar{display:none}
+.carousel-track.dragging{cursor:grabbing;scroll-behavior:auto}
+.gallery-item{
+  flex:0 0 clamp(220px,26vw,340px);aspect-ratio:4/5;scroll-snap-align:start;
+  overflow:hidden;border-radius:var(--radius-lg);position:relative;background:var(--surface);
+}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-item.branded{display:flex;align-items:center;justify-content:center;
+  background:var(--accent);color:var(--accent-ink)}
+.gallery-item.branded .brand-tile{text-align:center;padding:20px}
+.gallery-item.branded .brand-tile .bt-mark{font-family:var(--font-display);font-size:38px;letter-spacing:.3em;font-weight:600;text-transform:uppercase}
+.gallery-item.branded .brand-tile .bt-sub{font-size:11px;letter-spacing:.3em;margin-top:10px;opacity:.85}
+.carousel-btn{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:5;
+  width:48px;height:48px;border-radius:50%;
+  background:color-mix(in srgb,var(--surface) 90%,transparent);
+  border:1px solid var(--border);color:var(--text);
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(6px);transition:background .2s,transform .2s;
+}
+.carousel-btn:hover{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.carousel-btn.prev{left:6px}.carousel-btn.next{right:6px}
+.carousel-btn svg{width:20px;height:20px}
+
+/* ================================================================
+   ABOUT / INTRO
+   ================================================================ */
+.about{text-align:center}
+.about-inner{max-width:820px;margin:0 auto;padding:0 var(--gutter)}
+.about .eyebrow{display:block;margin-bottom:30px;font-size:clamp(12px,1.4vw,15px);letter-spacing:.2em;line-height:1.6}
+.about-body{
+  font-family:var(--font-display);
+  font-size:clamp(19px,2.2vw,27px);line-height:1.62;color:var(--text-soft);
+  font-weight:300;letter-spacing:.01em;
+}
+.theme-bento .about-body{font-family:var(--font-body);font-weight:400;font-size:clamp(17px,1.7vw,21px)}
+.about .btn{margin-top:42px}
+
+/* ================================================================
+   FEATURE BLOCKS
+   ================================================================ */
+.feature{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;gap:0;
+  max-width:var(--maxw);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+.feature-text{
+  background:var(--accent);color:var(--accent-ink);
+  padding:clamp(40px,6vw,90px);display:flex;flex-direction:column;justify-content:center;
+  border-radius:var(--radius);
+}
+.feature-text .eyebrow{color:var(--accent-ink);opacity:.75;margin-bottom:16px}
+.feature-text h2{font-size:clamp(32px,4vw,54px);margin-bottom:22px;color:var(--accent-ink)}
+.feature-text p{font-size:16px;line-height:1.7;opacity:.92;margin-bottom:34px;max-width:36ch}
+.feature-text .btn{align-self:flex-start;border-color:var(--accent-ink);color:var(--accent-ink)}
+.feature-text .btn:hover{background:var(--accent-ink);color:var(--accent)}
+.feature-photo{overflow:hidden;border-radius:var(--radius);min-height:420px}
+.feature-photo img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.feature:hover .feature-photo img{transform:scale(1.05)}
+.feature-b .feature-photo{order:-1}
+
+/* ================================================================
+   LOCATIONS (carousel)
+   ================================================================ */
+.loc-card{
+  flex:0 0 clamp(260px,30vw,360px);scroll-snap-align:start;
+  border-radius:var(--radius-lg);overflow:hidden;position:relative;
+  background:var(--surface);border:1px solid var(--border);
+}
+.loc-card .loc-img{aspect-ratio:4/5;overflow:hidden}
+.loc-card img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.loc-card:hover img{transform:scale(1.05)}
+.loc-meta{padding:20px 22px}
+.loc-meta h3{font-family:var(--font-display);font-size:clamp(20px,2.2vw,27px);text-transform:none;letter-spacing:normal;font-weight:500}
+.loc-meta .loc-city{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-soft);margin-top:6px}
+
+/* Editorial loc overlay treatment */
+.theme-editorial .loc-card{border:none;background:none}
+.theme-editorial .loc-card .loc-img{aspect-ratio:3/4}
+.theme-editorial .loc-meta{position:absolute;left:0;right:0;bottom:0;
+  background:linear-gradient(0deg,rgba(0,0,0,.85),transparent);padding:40px 22px 22px}
+.theme-editorial .loc-meta h3{color:#fff}
+
+/* ================================================================
+   NEWSLETTER
+   ================================================================ */
+.newsletter{text-align:center;background:var(--bg-alt)}
+.theme-editorial .newsletter{background:var(--bg-alt)}
+.newsletter-inner{max-width:620px;margin:0 auto;padding:0 var(--gutter)}
+.newsletter h2{font-size:clamp(28px,3.6vw,48px);margin-bottom:14px}
+.newsletter p.n-sub{color:var(--text-soft);margin-bottom:32px}
+.newsletter-form{display:flex;gap:10px;max-width:480px;margin:0 auto}
+.newsletter-form input{
+  flex:1;padding:15px 20px;background:var(--surface);color:var(--text);
+  border:1px solid var(--border-strong);border-radius:var(--btn-radius);outline:none;
+}
+.newsletter-form input:focus{border-color:var(--accent)}
+.newsletter-form input::placeholder{color:var(--text-faint)}
+.consent{font-size:12px;color:var(--text-faint);margin-top:22px;line-height:1.6}
+
+/* ================================================================
+   AWARDS
+   ================================================================ */
+.awards{text-align:center;background:var(--bg)}
+.awards-inner{max-width:900px;margin:0 auto;padding:0 var(--gutter)}
+.award-badges{display:flex;justify-content:center;gap:clamp(18px,4vw,52px);flex-wrap:wrap;margin-bottom:38px}
+.award-badge{display:flex;flex-direction:column;align-items:center;color:var(--accent);width:96px}
+.award-badge svg{width:74px;height:74px}
+.award-badge .yr{font-family:var(--font-display);font-size:15px;letter-spacing:.1em;margin-top:-46px;font-weight:600;color:var(--text)}
+.awards h2{font-size:clamp(24px,3vw,40px);margin-bottom:16px}
+.awards p{color:var(--text-soft);max-width:60ch;margin:0 auto;font-size:15px}
+
+/* ================================================================
+   INFO BAR
+   ================================================================ */
+.infobar{background:var(--bg-alt)}
+.infobar-inner{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(30px,5vw,70px)}
+.info-col h3{font-family:var(--font-body);font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:22px;font-weight:600}
+.theme-editorial .info-col h3{color:var(--accent)}
+.info-col p,.info-col li{color:var(--text-soft);font-size:15px;line-height:2}
+.info-col a.inline{color:var(--text);border-bottom:1px solid var(--border-strong);padding-bottom:1px}
+.info-col a.inline:hover{color:var(--accent);border-color:var(--accent)}
+.info-actions{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+.site-footer{background:var(--bg);border-top:1px solid var(--border);padding:clamp(60px,8vw,96px) 0 40px}
+.footer-inner{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.footer-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;
+  padding-bottom:48px;border-bottom:1px solid var(--border)}
+.footer-brand .wordmark{font-size:30px;margin-bottom:18px;display:inline-block;padding-left:.34em}
+.footer-brand p{color:var(--text-soft);font-size:14px;max-width:30ch}
+.footer-social{display:flex;gap:14px;margin-top:22px}
+.footer-social a{width:40px;height:40px;border:1px solid var(--border-strong);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;transition:all .2s}
+.footer-social a:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.footer-social svg{width:17px;height:17px}
+.footer-links{display:grid;grid-template-columns:repeat(2,auto);gap:12px 60px}
+.footer-links a{font-size:13px;color:var(--text-soft);letter-spacing:.04em;transition:color .2s}
+.footer-links a:hover{color:var(--accent)}
+.footer-strip{text-align:center;padding:40px 0 8px;color:var(--text-faint);letter-spacing:.3em;
+  font-size:12px;text-transform:uppercase}
+.footer-strip .group-name{font-family:var(--font-display);font-size:16px;letter-spacing:.24em;color:var(--text-soft)}
+.footer-legal{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;margin:22px 0 18px}
+.footer-legal a{font-size:11px;color:var(--text-faint);letter-spacing:.06em}
+.footer-legal a:hover{color:var(--accent)}
+.copyright{text-align:center;font-size:12px;color:var(--text-faint);letter-spacing:.08em}
+
+/* ================================================================
+   FLOATING STYLE SWITCHER
+   ================================================================ */
+.switcher{position:fixed;bottom:24px;right:24px;z-index:9999;font-family:'Inter',sans-serif}
+.switcher-toggle{
+  display:flex;align-items:center;gap:12px;
+  background:rgba(20,20,24,.72);color:#f4f2ee;
+  backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.16);
+  padding:11px 16px 11px 13px;border-radius:999px;
+  box-shadow:0 14px 40px -10px rgba(0,0,0,.55);transition:transform .2s,box-shadow .2s;
+}
+.switcher-toggle:hover{transform:translateY(-2px);box-shadow:0 18px 44px -10px rgba(0,0,0,.6)}
+.switcher-toggle .sw-swatch{width:22px;height:22px;border-radius:7px;flex:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.switcher-toggle .sw-labels{display:flex;flex-direction:column;line-height:1.15;text-align:left}
+.switcher-toggle .sw-kicker{font-size:9px;letter-spacing:.18em;text-transform:uppercase;opacity:.55}
+.switcher-toggle .sw-name{font-size:13px;font-weight:600;letter-spacing:.02em}
+.switcher-toggle .sw-caret{width:16px;height:16px;opacity:.6;transition:transform .3s var(--ease)}
+.switcher.open .sw-caret{transform:rotate(180deg)}
+
+.switcher-panel{
+  position:absolute;bottom:calc(100% + 12px);right:0;width:290px;
+  background:rgba(20,20,24,.86);
+  backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.14);border-radius:20px;
+  padding:10px;box-shadow:0 24px 60px -16px rgba(0,0,0,.6);
+  opacity:0;visibility:hidden;transform:translateY(10px) scale(.97);transform-origin:bottom right;
+  transition:opacity .28s var(--ease),transform .28s var(--ease),visibility .28s;
+}
+.switcher.open .switcher-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.switcher-panel .sw-head{color:#8f8c86;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  padding:8px 10px 10px}
+.sw-option{
+  display:flex;align-items:center;gap:13px;width:100%;text-align:left;
+  padding:11px 12px;border-radius:13px;color:#e9e6e0;transition:background .2s;
+}
+.sw-option:hover,.sw-option:focus-visible{background:rgba(255,255,255,.08);outline:none}
+.sw-option.active{background:rgba(255,255,255,.11)}
+.sw-option .sw-swatch{width:30px;height:30px;border-radius:9px;flex:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.sw-option .sw-text{flex:1}
+.sw-option .sw-t-name{font-size:14px;font-weight:600;display:block}
+.sw-option .sw-t-desc{font-size:11.5px;color:#9b988f;display:block;margin-top:1px}
+.sw-option .sw-check{width:18px;height:18px;opacity:0;color:#fff;transition:opacity .2s}
+.sw-option.active .sw-check{opacity:1}
+
+/* swatch gradients per theme */
+.sw-sw-editorial{background:linear-gradient(135deg,#0b0b0c 46%,#b23a2e 46%)}
+.sw-sw-minimalist{background:linear-gradient(135deg,#ffffff 46%,#3a3f35 46%)}
+.sw-sw-illustrative{background:linear-gradient(135deg,#f6eedd 40%,#c25a3a 40% 70%,#2e4034 70%)}
+.sw-sw-bento{background:linear-gradient(135deg,#f2f2f4 40%,#0071e3 40% 70%,#c8322a 70%)}
+
+/* ================================================================
+   THEME OVERRIDES — MINIMALIST
+   ================================================================ */
+.theme-minimalist .hero{text-align:left}
+.theme-minimalist .hero-media::after{
+  background:linear-gradient(90deg,rgba(250,249,246,.96) 0%,rgba(250,249,246,.7) 34%,rgba(250,249,246,0) 62%);}
+.theme-minimalist .hero-inner{max-width:1120px;width:100%;margin:0 auto;display:flex}
+.theme-minimalist .hero .hero-text{max-width:520px}
+.theme-minimalist .hero .eyebrow{color:var(--text-soft)}
+.theme-minimalist .hero-title{color:var(--text);font-weight:400;text-shadow:none;font-size:clamp(46px,8vw,104px)}
+.theme-minimalist .hero-welcome{color:var(--text-soft)}
+.theme-minimalist .hero .btn-ghost{color:var(--text);border-color:var(--border-strong)}
+.theme-minimalist .hero .btn-ghost:hover{background:var(--text);color:var(--bg)}
+.theme-minimalist .scroll-chev{color:var(--text-soft)}
+.theme-minimalist .reveal{transform:none}
+/* feature = hairline split, no red card */
+.theme-minimalist .feature{gap:clamp(30px,5vw,72px);align-items:center}
+.theme-minimalist .feature-text{background:transparent;color:var(--text);padding:clamp(10px,2vw,40px) 0;
+  border-top:1px solid var(--border);border-left:none}
+.theme-minimalist .feature-text .eyebrow{color:var(--text-soft)}
+.theme-minimalist .feature-text h2{color:var(--text)}
+.theme-minimalist .feature-text p{color:var(--text-soft)}
+.theme-minimalist .feature-text .btn{background:transparent;color:var(--text);border:none;
+  border-bottom:1px solid var(--text);border-radius:0;padding:8px 0;letter-spacing:.1em}
+.theme-minimalist .feature-text .btn:hover{background:transparent;color:var(--accent);border-color:var(--accent)}
+.theme-minimalist .feature-photo{border-radius:var(--radius-lg)}
+.theme-minimalist .gallery-item.branded{background:var(--surface-2);color:var(--text)}
+.theme-minimalist .award-badge{color:var(--text-soft)}
+.theme-minimalist .newsletter,.theme-minimalist .infobar{background:var(--bg-alt)}
+.theme-minimalist .btn-primary{color:#fff}
+
+/* ================================================================
+   THEME OVERRIDES — ILLUSTRATIVE
+   ================================================================ */
+.theme-illustrative .hero{background:var(--bg)}
+.theme-illustrative .hero-media{inset:auto;position:relative;width:min(440px,72vw);height:min(560px,64vh);
+  margin:0 auto;border-radius:260px 260px 18px 18px;overflow:hidden;
+  border:3px solid var(--accent);box-shadow:var(--shadow)}
+.theme-illustrative .hero-media::after{background:linear-gradient(180deg,transparent 55%,rgba(32,33,28,.35))}
+.theme-illustrative .hero{flex-direction:column;gap:10px;padding-top:calc(var(--nav-h) + 30px)}
+.theme-illustrative .hero-inner{order:-1;padding-bottom:6px}
+.theme-illustrative .hero .eyebrow{color:var(--accent);opacity:1}
+.theme-illustrative .hero-title{color:var(--text);text-shadow:none;font-style:normal;font-size:clamp(52px,10vw,132px)}
+.theme-illustrative .hero-title .hand{font-family:var(--font-hand);color:var(--accent);font-weight:700;
+  text-transform:none;letter-spacing:0;display:inline-block;transform:rotate(-4deg)}
+.theme-illustrative .hero-welcome{color:var(--text-soft)}
+.theme-illustrative .hero .btn-ghost{color:var(--text);border-color:var(--accent)}
+.theme-illustrative .hero .btn-ghost:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.theme-illustrative .scroll-chev{color:var(--accent)}
+/* decorative motifs in hero */
+.theme-illustrative .hero-illus .m{position:absolute;color:var(--accent);opacity:.5}
+.theme-illustrative .hero-illus .crane{top:16%;right:8%;width:130px;color:var(--accent-2)}
+.theme-illustrative .hero-illus .wave-h{bottom:0;left:0;right:0;width:100%;color:var(--accent);opacity:.4}
+.theme-illustrative .hero-illus .sprig{top:22%;left:6%;width:90px;color:var(--accent-2);opacity:.55}
+/* section dividers = drawn wave */
+.theme-illustrative .wave-divider{display:block;width:100%;color:var(--accent);opacity:.5;margin:0 auto}
+/* feature = illustrated panel, not photo card */
+.theme-illustrative .feature{gap:clamp(24px,4vw,56px);align-items:center}
+.theme-illustrative .feature-text{background:var(--surface);color:var(--text);
+  border:2px solid var(--accent);border-radius:var(--radius-lg);position:relative}
+.theme-illustrative .feature-text .eyebrow{color:var(--accent);opacity:1}
+.theme-illustrative .feature-text h2{color:var(--text)}
+.theme-illustrative .feature-text p{color:var(--text-soft)}
+.theme-illustrative .feature-text .btn{background:var(--accent);color:#fff;border-color:var(--accent)}
+.theme-illustrative .feature-text .btn:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.theme-illustrative .feature-b .feature-text{border-color:var(--accent-2)}
+.theme-illustrative .feature-photo{border-radius:180px 180px var(--radius-lg) var(--radius-lg);
+  border:3px solid var(--accent-3)}
+.theme-illustrative .feature-corner{position:absolute;width:52px;height:52px;color:var(--accent-3)}
+.theme-illustrative .feature-corner.tl{top:-14px;left:-14px}
+.theme-illustrative .feature-corner.br{bottom:-14px;right:-14px;transform:rotate(180deg)}
+.theme-illustrative .gallery-item{border:2px solid var(--accent);border-radius:20px}
+.theme-illustrative .gallery-item.branded{background:var(--accent-2);color:#fff;border-color:var(--accent-2)}
+.theme-illustrative .loc-card{border:2px solid var(--accent);border-radius:20px}
+.theme-illustrative .award-badge{color:var(--accent)}
+.theme-illustrative .btn-primary{color:#fff}
+.theme-illustrative .site-footer{background:var(--bg-alt)}
+.theme-illustrative .info-col h3{color:var(--accent)}
+
+/* ================================================================
+   THEME OVERRIDES — BENTO  (mosaic of tiles)
+   ================================================================ */
+.theme-bento main{
+  max-width:1320px;margin:0 auto;padding:calc(var(--nav-h) + 20px) var(--gutter) 40px;
+  display:grid;grid-template-columns:repeat(12,1fr);gap:var(--bento-gap);
+  grid-auto-flow:row dense;
+}
+.theme-bento .section{
+  padding:clamp(28px,3vw,44px);background:var(--surface);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;position:relative;min-height:0;
+  border:1px solid var(--border);
+}
+.theme-bento .reveal{transform:translateY(16px)}
+/* spans */
+.theme-bento #hero{grid-column:span 12}
+.theme-bento #gallery{grid-column:span 12}
+.theme-bento #about{grid-column:span 7}
+.theme-bento #menu{grid-column:span 5}
+.theme-bento #events{grid-column:span 6}
+.theme-bento #locations{grid-column:span 6}
+.theme-bento #newsletter{grid-column:span 6}
+.theme-bento #awards{grid-column:span 6}
+.theme-bento #contact{grid-column:span 12}
+
+/* hero tile */
+.theme-bento .hero{min-height:clamp(440px,54vh,600px);padding:0;border-radius:var(--radius);color:#fff}
+.theme-bento .hero-media::after{background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.7))}
+.theme-bento .hero-inner{padding:clamp(30px,5vw,64px)}
+.theme-bento .hero-title{font-family:var(--font-body);font-weight:700;letter-spacing:-.03em;font-size:clamp(44px,8vw,104px)}
+.theme-bento .hero .eyebrow{color:#fff;opacity:.85}
+.theme-bento .hero-cta .btn{border-radius:980px;text-transform:none;letter-spacing:0}
+.theme-bento .hero .btn-primary{background:#fff;color:#111;border-color:#fff}
+.theme-bento .hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.6)}
+/* gallery tile → grid of image tiles */
+.theme-bento #gallery .carousel{padding:0;max-width:none}
+.theme-bento #gallery .carousel-track{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--bento-gap);
+  overflow:visible;padding:0;cursor:default}
+.theme-bento #gallery .gallery-item{flex:none;width:auto;aspect-ratio:1;border-radius:16px}
+.theme-bento #gallery .carousel-btn{display:none}
+.theme-bento .section-head{padding:0 0 22px;text-align:left}
+.theme-bento .section-head h2{font-size:clamp(24px,2.6vw,36px)}
+/* about tile */
+.theme-bento .about{text-align:left}
+.theme-bento .about-inner{max-width:none;padding:0}
+.theme-bento .about .eyebrow{margin-bottom:18px}
+/* feature tiles */
+.theme-bento .feature{padding:0;max-width:none;grid-template-columns:1fr;gap:0;height:100%}
+.theme-bento .feature-photo{border-radius:16px;height:clamp(220px,24vw,300px);min-height:0;margin-bottom:22px;order:0 !important}
+.theme-bento .feature-photo img{height:100%}
+.theme-bento .feature-b .feature-photo{order:0}
+.theme-bento .feature-text{background:transparent;color:var(--text);padding:0}
+.theme-bento .feature-text .eyebrow{color:var(--accent-2)}
+.theme-bento .feature-text h2{color:var(--text);font-family:var(--font-body);font-size:clamp(26px,3vw,38px)}
+.theme-bento .feature-text p{color:var(--text-soft)}
+.theme-bento .feature-text .btn{background:none;color:var(--accent);border:none;padding:0;
+  letter-spacing:0;text-transform:none;font-size:15px;font-weight:500}
+.theme-bento .feature-text .btn:hover{background:none;color:var(--accent);text-decoration:underline}
+/* locations tile */
+.theme-bento #locations .carousel{padding:0;max-width:none}
+.theme-bento #locations .carousel-btn{display:none}
+.theme-bento .loc-card{flex:0 0 clamp(180px,44%,220px);border-radius:16px}
+/* newsletter / awards / infobar tiles */
+.theme-bento .newsletter,.theme-bento .awards,.theme-bento .infobar{background:var(--surface);text-align:left}
+.theme-bento .newsletter-inner{max-width:none;padding:0}
+.theme-bento .newsletter-form{margin:0}
+.theme-bento .awards-inner{max-width:none;padding:0}
+.theme-bento .award-badges{justify-content:flex-start;gap:22px;margin-bottom:26px}
+.theme-bento .award-badge{color:var(--accent-2);width:74px}
+.theme-bento .award-badge svg{width:56px;height:56px}
+.theme-bento .awards h2,.theme-bento .newsletter h2{text-align:left;font-size:clamp(22px,2.4vw,32px)}
+.theme-bento .awards p{margin:0}
+.theme-bento .infobar-inner{padding:0;gap:30px}
+.theme-bento .btn-primary{color:#fff}
+/* colored accent tiles for pop */
+.theme-bento #menu{background:linear-gradient(160deg,#1d1d1f,#2b2b2e);color:#fff;border:none}
+.theme-bento #menu .feature-text h2,.theme-bento #menu .feature-text p{color:#fff}
+.theme-bento #menu .feature-text p{opacity:.8}
+.theme-bento #menu .feature-text .btn{color:#4aa3ff}
+.theme-bento #newsletter{background:linear-gradient(160deg,#c8322a,#9c241d);color:#fff;border:none}
+.theme-bento #newsletter h2{color:#fff}
+.theme-bento #newsletter .n-sub,.theme-bento #newsletter .consent{color:rgba(255,255,255,.8)}
+.theme-bento #newsletter input{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);color:#fff}
+.theme-bento #newsletter input::placeholder{color:rgba(255,255,255,.7)}
+.theme-bento #newsletter .btn-primary{background:#fff;color:#c8322a;border-color:#fff}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media(max-width:920px){
+  .hamburger{display:flex}
+  .nav{
+    position:fixed;top:0;right:0;bottom:0;width:min(84vw,340px);
+    flex-direction:column;align-items:flex-start;justify-content:center;gap:26px;
+    background:var(--bg);padding:80px 40px;
+    transform:translateX(100%);transition:transform .4s var(--ease);
+    border-left:1px solid var(--border);z-index:850;
+  }
+  .nav-open .nav{transform:translateX(0)}
+  .nav a:not(.btn){font-size:16px}
+  .nav .btn{margin-top:8px}
+  .site-header{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px)}
+  .theme-editorial .site-header{background:rgba(11,11,12,.8)}
+
+  .feature{grid-template-columns:1fr}
+  .feature-b .feature-photo{order:0}
+  .feature-photo{min-height:300px}
+  .theme-minimalist .feature-text{border-top:none}
+
+  .infobar-inner{grid-template-columns:1fr;gap:36px}
+  .footer-top{flex-direction:column}
+  .footer-links{grid-template-columns:repeat(2,auto);gap:12px 40px}
+
+  .theme-minimalist .hero-inner{padding-top:120px;align-items:flex-end}
+  .theme-minimalist .hero-media::after{
+    background:linear-gradient(180deg,rgba(250,249,246,.5),rgba(250,249,246,.96))}
+
+  /* bento collapses to single column stack */
+  .theme-bento main{grid-template-columns:1fr}
+  .theme-bento #hero,.theme-bento #gallery,.theme-bento #about,.theme-bento #menu,
+  .theme-bento #events,.theme-bento #locations,.theme-bento #newsletter,
+  .theme-bento #awards,.theme-bento #contact{grid-column:1 / -1}
+  .theme-bento #gallery .carousel-track{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .switcher-toggle .sw-labels{display:none}
+  .switcher-panel{width:min(84vw,290px)}
+  .hero-cta{flex-direction:column;width:100%;max-width:320px;margin-left:auto;margin-right:auto}
+  .hero-cta .btn{width:100%}
+  .newsletter-form{flex-direction:column}
+  .newsletter-form .btn{width:100%}
+  .award-badges{gap:20px}
+  .theme-illustrative .feature-photo{border-radius:120px 120px 20px 20px}
+}
+
+/* reduce motion */
+@media(prefers-reduced-motion:reduce){
+  *{animation:none !important}
+  .reveal{opacity:1 !important;transform:none !important;transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+
+<body class="theme-editorial">
+
+<!-- ============================ HEADER ============================ -->
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a href="#top" class="wordmark">SORA</a>
+    <nav class="nav" id="nav">
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#events">Private Events</a>
+      <a href="#locations">Locations</a>
+      <a href="#contact">Contact</a>
+      <a href="#newsletter" class="nav-utility">Delivery &amp; Pickup</a>
+      <a href="#" class="btn btn-primary">Reservations</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================ HERO ============================ -->
+  <section id="hero" class="hero">
+    <div class="hero-media">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=2000&q=80&auto=format&fit=crop" alt="SORA dining room" />
+    </div>
+    <div class="hero-illus" aria-hidden="true">
+      <svg class="illus m crane" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 70c8-2 14-8 20-16 4-6 10-12 18-14 6-1 12 0 16 4"/>
+        <path d="M74 44c4-2 8-1 10 2M58 30c-4 2-6 6-6 10M40 54l-6 20M52 52l2 22"/>
+        <circle cx="76" cy="42" r="1.4" fill="currentColor"/>
+        <path d="M78 41l8-3-6 5"/>
+      </svg>
+      <svg class="illus m sprig" viewBox="0 0 60 100" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M30 96V16M30 60c-14-4-20-16-20-30M30 48c14-2 20-14 20-28M30 34c-10-2-15-10-16-22M30 26c10 0 16-8 17-18"/>
+      </svg>
+      <svg class="illus m wave-h" viewBox="0 0 1200 60" fill="none" stroke="currentColor" stroke-width="2" preserveAspectRatio="none">
+        <path d="M0 40q30-30 60 0t60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0"/>
+        <path d="M0 55q30-30 60 0t60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0" opacity=".5"/>
+      </svg>
+    </div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">Lower Manhattan, Japanese-Styled</p>
+        <h1 class="hero-title">Tokyo Soul,<br><span class="hand">City Nights</span></h1>
+        <p class="hero-welcome">Welcome to SORA</p>
+        <div class="hero-cta">
+          <a href="#" class="btn btn-primary">Make a Reservation</a>
+          <a href="#menu" class="btn btn-ghost">View Menu</a>
+        </div>
+      </div>
+    </div>
+    <a href="#gallery" class="scroll-chev" aria-label="Scroll down">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+    </a>
+  </section>
+
+  <!-- ============================ GALLERY ============================ -->
+  <section id="gallery" class="section gallery reveal">
+    <div class="section-head">
+      <span class="eyebrow">From the Pass</span>
+      <h2>The Gallery</h2>
+    </div>
+    <div class="carousel">
+      <button class="carousel-btn prev" data-target="gallery-track" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="carousel-track" id="gallery-track">
+        <figure class="gallery-item"><img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=700&q=80&auto=format&fit=crop" alt="Nigiri selection" /></figure>
+        <figure class="gallery-item"><img src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=700&q=80&auto=format&fit=crop" alt="Sushi platter" /></figure>
+        <figure class="gallery-item"><img src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=700&q=80&auto=format&fit=crop" alt="Chef's selection" /></figure>
+        <figure class="gallery-item branded">
+          <div class="brand-tile"><div class="bt-mark">SORA</div><div class="bt-sub">— NYC —</div></div>
+        </figure>
+        <figure class="gallery-item"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=700&q=80&auto=format&fit=crop" alt="Robata grill" /></figure>
+        <figure class="gallery-item"><img src="https://images.unsplash.com/photo-1553163147-622ab57be1c7?w=700&q=80&auto=format&fit=crop" alt="Sashimi" /></figure>
+        <figure class="gallery-item"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=700&q=80&auto=format&fit=crop" alt="Signature bowl" /></figure>
+      </div>
+      <button class="carousel-btn next" data-target="gallery-track" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================ ABOUT ============================ -->
+  <section id="about" class="section about reveal">
+    <div class="about-inner">
+      <span class="eyebrow">Japanese Modern Classics with a New York Point of View</span>
+      <p class="about-body">SORA is a modern Japanese restaurant built on a simple belief — that tradition and invention belong at the same table. Beneath Lower Manhattan's glow, our chefs translate centuries of technique into a menu made for sharing: robata and yakitori, temaki cut to order, snow-aged wagyu, and a cellar of rare sake. Ingredients travel from the Greenmarket and Tokyo's Toyosu Market alike. The room hums; the night runs long.</p>
+      <a href="#" class="btn btn-primary">Make a Reservation</a>
+    </div>
+  </section>
+
+  <!-- ============================ FEATURE A — MENU ============================ -->
+  <section id="menu" class="section feature feature-a reveal">
+    <div class="feature-text">
+      <svg class="illus feature-corner tl" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 26C4 14 14 4 26 4M4 26v14M4 26h14"/></svg>
+      <span class="eyebrow">On the Menu</span>
+      <h2>Sushi &amp; Sashimi Sets</h2>
+      <p>Dive into an elevated sushi experience served tableside, with the chef's selection of the freshest fish sourced from the best purveyors worldwide — including Japan's famous Toyosu Market.</p>
+      <a href="#" class="btn">View Menu</a>
+    </div>
+    <div class="feature-photo">
+      <img src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=1200&q=80&auto=format&fit=crop" alt="Sushi and sashimi set" />
+    </div>
+  </section>
+
+  <!-- ============================ FEATURE B — EVENTS ============================ -->
+  <section id="events" class="section feature feature-b reveal">
+    <div class="feature-text">
+      <svg class="illus feature-corner br" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 26C4 14 14 4 26 4M4 26v14M4 26h14"/></svg>
+      <span class="eyebrow">Gatherings</span>
+      <h2>Private Events</h2>
+      <p>Host your private event in the refined ambiance of SORA, where contemporary design meets bespoke dining and unforgettable service.</p>
+      <a href="#" class="btn">Book Now</a>
+    </div>
+    <div class="feature-photo">
+      <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1200&q=80&auto=format&fit=crop" alt="SORA private dining room" />
+    </div>
+  </section>
+
+  <!-- ============================ LOCATIONS ============================ -->
+  <section id="locations" class="section locations reveal">
+    <div class="section-head">
+      <span class="eyebrow">Our World</span>
+      <h2>Featured Locations</h2>
+    </div>
+    <div class="carousel">
+      <button class="carousel-btn prev" data-target="loc-track" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="carousel-track" id="loc-track">
+        <article class="loc-card">
+          <div class="loc-img"><img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800&q=80&auto=format&fit=crop" alt="Kumo" /></div>
+          <div class="loc-meta"><h3>Kumo</h3><div class="loc-city">New York</div></div>
+        </article>
+        <article class="loc-card">
+          <div class="loc-img"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80&auto=format&fit=crop" alt="Hana Rooftop" /></div>
+          <div class="loc-meta"><h3>Hana Rooftop</h3><div class="loc-city">Miami</div></div>
+        </article>
+        <article class="loc-card">
+          <div class="loc-img"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80&auto=format&fit=crop" alt="Izakaya West" /></div>
+          <div class="loc-meta"><h3>Izakaya West</h3><div class="loc-city">Los Angeles</div></div>
+        </article>
+        <article class="loc-card">
+          <div class="loc-img"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80&auto=format&fit=crop" alt="The Lantern Room" /></div>
+          <div class="loc-meta"><h3>The Lantern Room</h3><div class="loc-city">Chicago</div></div>
+        </article>
+        <article class="loc-card">
+          <div class="loc-img"><img src="https://images.unsplash.com/photo-1600335895229-6e75511892c8?w=800&q=80&auto=format&fit=crop" alt="SORA Uptown" /></div>
+          <div class="loc-meta"><h3>SORA Uptown</h3><div class="loc-city">New York</div></div>
+        </article>
+      </div>
+      <button class="carousel-btn next" data-target="loc-track" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================ NEWSLETTER ============================ -->
+  <section id="newsletter" class="section newsletter reveal">
+    <div class="newsletter-inner">
+      <h2>Join our Mailing List</h2>
+      <p class="n-sub">Be first to know about seasonal menus, sake dinners, and members' nights.</p>
+      <form class="newsletter-form" onsubmit="return false">
+        <input type="email" placeholder="Email address" aria-label="Email address" required />
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+      <p class="consent">By signing up, I agree to SORA's Terms of Use. I also agree to SORA's Privacy Policy.</p>
+    </div>
+  </section>
+
+  <!-- ============================ AWARDS ============================ -->
+  <section id="awards" class="section awards reveal">
+    <div class="awards-inner">
+      <div class="award-badges">
+        <div class="award-badge">
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M32 24C22 34 20 52 30 74M68 24c10 10 12 28 2 50" stroke-linecap="round"/><path d="M30 40c-4 2-6 4-7 8M30 54c-4 1-7 2-9 5M70 40c4 2 6 4 7 8M70 54c4 1 7 2 9 5" stroke-linecap="round"/><circle cx="50" cy="46" r="10"/></svg>
+          <span class="yr">2023</span>
+        </div>
+        <div class="award-badge">
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M32 24C22 34 20 52 30 74M68 24c10 10 12 28 2 50" stroke-linecap="round"/><path d="M30 40c-4 2-6 4-7 8M30 54c-4 1-7 2-9 5M70 40c4 2 6 4 7 8M70 54c4 1 7 2 9 5" stroke-linecap="round"/><circle cx="50" cy="46" r="10"/></svg>
+          <span class="yr">2024</span>
+        </div>
+        <div class="award-badge">
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M32 24C22 34 20 52 30 74M68 24c10 10 12 28 2 50" stroke-linecap="round"/><path d="M30 40c-4 2-6 4-7 8M30 54c-4 1-7 2-9 5M70 40c4 2 6 4 7 8M70 54c4 1 7 2 9 5" stroke-linecap="round"/><circle cx="50" cy="46" r="10"/></svg>
+          <span class="yr">2025</span>
+        </div>
+        <div class="award-badge">
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M32 24C22 34 20 52 30 74M68 24c10 10 12 28 2 50" stroke-linecap="round"/><path d="M30 40c-4 2-6 4-7 8M30 54c-4 1-7 2-9 5M70 40c4 2 6 4 7 8M70 54c4 1 7 2 9 5" stroke-linecap="round"/><circle cx="50" cy="46" r="10"/></svg>
+          <span class="yr">2026</span>
+        </div>
+      </div>
+      <h2>2023–2026 Award of Excellence Winner</h2>
+      <p>Honored with the Award of Excellence since 2023 by the Guild of Fine Dining, which celebrates the world's best restaurants for wine.</p>
+    </div>
+  </section>
+
+  <!-- ============================ INFO BAR ============================ -->
+  <section id="contact" class="section infobar reveal">
+    <div class="infobar-inner">
+      <div class="info-col">
+        <h3>Hours of Operation</h3>
+        <p>Tuesday – Thursday · 6PM–11PM<br>
+           Friday – Saturday · 6PM–12AM<br>
+           Sunday · 6PM–11PM<br>
+           Monday · Closed</p>
+      </div>
+      <div class="info-col">
+        <h3>Location</h3>
+        <p>88 Bowery<br>New York, NY 10013</p>
+        <p><a href="#" class="inline">Get Directions</a></p>
+        <p>Tel: <a href="tel:2125550199" class="inline">212.555.0199</a></p>
+      </div>
+      <div class="info-col">
+        <h3>Get in Touch</h3>
+        <div class="info-actions">
+          <a href="#" class="btn btn-ghost">Careers</a>
+          <a href="#" class="btn btn-ghost">Press Inquiries</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#top" class="wordmark">SORA</a>
+        <p>A modern high-end Japanese restaurant in Lower Manhattan. Tokyo soul, city nights.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l.5-3H13V9c0-.9.3-1.5 1.6-1.5H16.5V5c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2V11H7v3h3v8h3z"/></svg></a>
+        </div>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#">Reservations</a>
+        <a href="#">Special Events</a>
+        <a href="#">Rewards</a>
+        <a href="#">Gift Cards</a>
+        <a href="#">Careers</a>
+        <a href="#">Press Inquiries</a>
+        <a href="#">Delivery &amp; Pickup</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-strip">
+      <div class="group-name">Meridian Hospitality Group</div>
+    </div>
+    <div class="footer-legal">
+      <a href="#">Restaurants</a><a href="#">Nightlife</a><a href="#">Daylife</a>
+      <a href="#">Newsletter</a><a href="#">Privacy</a><a href="#">Terms</a>
+      <a href="#">Diversity</a><a href="#">Your Privacy Choices</a>
+    </div>
+    <p class="copyright">© 2026 Meridian Hospitality Group. All Rights Reserved. · Demo site — not a real restaurant.</p>
+  </div>
+</footer>
+
+<!-- ============================ STYLE SWITCHER ============================ -->
+<div class="switcher" id="switcher">
+  <button class="switcher-toggle" id="switcherToggle" aria-haspopup="true" aria-expanded="false">
+    <span class="sw-swatch sw-sw-editorial" id="currentSwatch"></span>
+    <span class="sw-labels">
+      <span class="sw-kicker">Design Style</span>
+      <span class="sw-name" id="currentName">Editorial</span>
+    </span>
+    <svg class="sw-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
+  <div class="switcher-panel" id="switcherPanel" role="menu" aria-label="Choose a design style">
+    <div class="sw-head">Choose a Design Style</div>
+    <button class="sw-option active" role="menuitemradio" aria-checked="true" data-theme="editorial">
+      <span class="sw-swatch sw-sw-editorial"></span>
+      <span class="sw-text"><span class="sw-t-name">Editorial</span><span class="sw-t-desc">Dark &amp; cinematic</span></span>
+      <svg class="sw-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>
+    </button>
+    <button class="sw-option" role="menuitemradio" aria-checked="false" data-theme="minimalist">
+      <span class="sw-swatch sw-sw-minimalist"></span>
+      <span class="sw-text"><span class="sw-t-name">Minimalist</span><span class="sw-t-desc">Light &amp; serene</span></span>
+      <svg class="sw-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>
+    </button>
+    <button class="sw-option" role="menuitemradio" aria-checked="false" data-theme="illustrative">
+      <span class="sw-swatch sw-sw-illustrative"></span>
+      <span class="sw-text"><span class="sw-t-name">Illustrative</span><span class="sw-t-desc">Warm &amp; hand-crafted</span></span>
+      <svg class="sw-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>
+    </button>
+    <button class="sw-option" role="menuitemradio" aria-checked="false" data-theme="bento">
+      <span class="sw-swatch sw-sw-bento"></span>
+      <span class="sw-text"><span class="sw-t-name">Bento</span><span class="sw-t-desc">Modular &amp; modern</span></span>
+      <svg class="sw-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* -------- in-memory state (no localStorage) -------- */
+  var THEMES = ["editorial","minimalist","illustrative","bento"];
+  var LABELS = {editorial:"Editorial",minimalist:"Minimalist",illustrative:"Illustrative",bento:"Bento"};
+  var current = "editorial";
+
+  var body = document.body;
+  var options = Array.prototype.slice.call(document.querySelectorAll(".sw-option"));
+  var currentName = document.getElementById("currentName");
+  var currentSwatch = document.getElementById("currentSwatch");
+
+  function setTheme(name){
+    if(THEMES.indexOf(name) === -1) return;
+    current = name;
+    THEMES.forEach(function(t){ body.classList.remove("theme-"+t); });
+    body.classList.add("theme-"+name);
+    // update switcher UI
+    options.forEach(function(o){
+      var active = o.getAttribute("data-theme") === name;
+      o.classList.toggle("active", active);
+      o.setAttribute("aria-checked", active ? "true" : "false");
+    });
+    currentName.textContent = LABELS[name];
+    currentSwatch.className = "sw-swatch sw-sw-" + name;
+  }
+
+  options.forEach(function(o){
+    o.addEventListener("click", function(){
+      setTheme(o.getAttribute("data-theme"));
+      closeSwitcher();
+    });
+  });
+
+  /* -------- switcher open/close -------- */
+  var switcher = document.getElementById("switcher");
+  var switcherToggle = document.getElementById("switcherToggle");
+
+  function openSwitcher(){ switcher.classList.add("open"); switcherToggle.setAttribute("aria-expanded","true"); }
+  function closeSwitcher(){ switcher.classList.remove("open"); switcherToggle.setAttribute("aria-expanded","false"); }
+
+  switcherToggle.addEventListener("click", function(e){
+    e.stopPropagation();
+    switcher.classList.contains("open") ? closeSwitcher() : openSwitcher();
+  });
+  document.addEventListener("click", function(e){
+    if(!switcher.contains(e.target)) closeSwitcher();
+  });
+  // keyboard: arrows + escape within the panel
+  switcher.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){ closeSwitcher(); switcherToggle.focus(); return; }
+    if(e.key === "ArrowDown" || e.key === "ArrowUp"){
+      var idx = options.indexOf(document.activeElement);
+      if(idx === -1) return;
+      e.preventDefault();
+      var next = e.key === "ArrowDown" ? (idx+1)%options.length : (idx-1+options.length)%options.length;
+      options[next].focus();
+    }
+  });
+
+  /* -------- mobile hamburger -------- */
+  var hamburger = document.getElementById("hamburger");
+  var nav = document.getElementById("nav");
+  function closeNav(){ body.classList.remove("nav-open"); hamburger.setAttribute("aria-expanded","false"); }
+  hamburger.addEventListener("click", function(){
+    var open = body.classList.toggle("nav-open");
+    hamburger.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  nav.addEventListener("click", function(e){ if(e.target.tagName === "A") closeNav(); });
+
+  /* -------- header shrink on scroll -------- */
+  var header = document.getElementById("top");
+  function onScroll(){ header.classList.toggle("scrolled", window.scrollY > 40); }
+  onScroll();
+  window.addEventListener("scroll", onScroll, {passive:true});
+
+  /* -------- carousel arrows -------- */
+  document.querySelectorAll(".carousel-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var track = document.getElementById(btn.getAttribute("data-target"));
+      if(!track) return;
+      var card = track.querySelector(":scope > *");
+      var amount = card ? (card.getBoundingClientRect().width + 16) * 1.4 : 320;
+      track.scrollBy({left: btn.classList.contains("prev") ? -amount : amount, behavior:"smooth"});
+    });
+  });
+
+  /* -------- drag-to-scroll for carousels -------- */
+  document.querySelectorAll(".carousel-track").forEach(function(track){
+    var down=false, startX=0, startLeft=0, moved=0;
+    track.addEventListener("pointerdown", function(e){
+      down=true; moved=0; startX=e.clientX; startLeft=track.scrollLeft;
+      track.classList.add("dragging");
+    });
+    track.addEventListener("pointermove", function(e){
+      if(!down) return;
+      var dx = e.clientX - startX; moved += Math.abs(dx);
+      track.scrollLeft = startLeft - dx;
+    });
+    function up(){ down=false; track.classList.remove("dragging"); }
+    track.addEventListener("pointerup", up);
+    track.addEventListener("pointerleave", up);
+    // prevent click navigation right after a drag
+    track.addEventListener("click", function(e){
+      if(moved > 8){ e.preventDefault(); }
+    }, true);
+  });
+
+  /* -------- reveal on scroll -------- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+    });
+  }, {threshold:0.12, rootMargin:"0px 0px -8% 0px"});
+  document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+
+  /* -------- init -------- */
+  setTheme("editorial");
+})();
+</script>
+
+</body>
+</html>
