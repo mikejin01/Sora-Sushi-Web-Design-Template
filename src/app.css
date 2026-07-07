@@ -50,7 +50,7 @@ body{
   --accent:#3a3f35; --accent-2:#242621; --accent-ink:#faf9f6;
   --border:rgba(28,27,25,.13); --border-strong:rgba(28,27,25,.28);
   --radius:2px; --radius-lg:4px; --btn-radius:40px; --field-radius:8px;
-  --maxw:1120px; --gutter:clamp(22px,6vw,96px); --section-pad:clamp(96px,13vw,168px);
+  --maxw:1120px; --gutter:clamp(22px,6vw,96px); --section-pad:clamp(68px,9vw,116px);
   --font-display:'EB Garamond',serif; --font-body:'Inter',sans-serif;
   --h-transform:none; --h-spacing:.005em; --h-weight:500; --h-lh:1.1;
   --eyebrow-spacing:.28em;
@@ -412,17 +412,44 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
 /* ================================================================
    THEME OVERRIDES — MINIMALIST
    ================================================================ */
-.theme-minimalist .hero{text-align:left}
-.theme-minimalist .hero-media::after{background:linear-gradient(90deg,rgba(250,249,246,.96) 0%,rgba(250,249,246,.7) 34%,rgba(250,249,246,0) 62%)}
-.theme-minimalist .hero-inner{max-width:1120px;width:100%;margin:0 auto;display:flex}
-.theme-minimalist .hero .hero-text{max-width:520px}
-.theme-minimalist .hero .eyebrow{color:var(--text-soft)}
-.theme-minimalist .hero-title{color:var(--text);font-weight:400;text-shadow:none;font-size:clamp(46px,8vw,104px)}
-.theme-minimalist .hero-welcome{color:var(--text-soft)}
-.theme-minimalist .hero .btn-ghost{color:var(--text);border-color:var(--border-strong)}
-.theme-minimalist .hero .btn-ghost:hover{background:var(--text);color:var(--bg)}
-.theme-minimalist .scroll-chev{color:var(--text-soft)}
+/* Hero — calm split panel: type on warm paper, media in a clean right panel.
+   Text never sits on the (dark) photo, so everything stays readable. */
+.theme-minimalist .hero{
+  display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,1fr);
+  align-items:stretch;text-align:left;background:var(--bg);
+}
+.theme-minimalist .hero-media{position:relative;inset:auto;grid-column:2;grid-row:1;overflow:hidden;min-height:0}
+.theme-minimalist .hero-media::after{background:none}
+.theme-minimalist .hero-inner{
+  grid-column:1;grid-row:1;max-width:none;width:100%;margin:0;
+  display:flex;align-items:center;
+  padding:clamp(28px,4vw,56px) clamp(28px,5vw,88px);
+}
+.theme-minimalist .hero .hero-text{max-width:560px}
+/* the H1 already reads "Lower East Side, Japanese-Styled" — drop the duplicate kicker */
+.theme-minimalist .hero .eyebrow{display:none}
+.theme-minimalist .hero-title{
+  color:var(--text);font-weight:400;text-shadow:none;
+  font-size:clamp(38px,4.6vw,64px);line-height:1.08;letter-spacing:.01em;
+}
+.theme-minimalist .hero-title .hand{font-style:italic;font-weight:400}
+.theme-minimalist .hero-welcome{margin-top:20px;color:var(--text-soft);font-size:12px;letter-spacing:.3em}
+.theme-minimalist .hero-cta{margin-top:34px;justify-content:flex-start;align-items:center}
+.theme-minimalist .hero .btn-ghost{
+  background:transparent;color:var(--text);border:none;border-bottom:1px solid var(--border-strong);
+  border-radius:0;padding:8px 2px;letter-spacing:.12em;
+}
+.theme-minimalist .hero .btn-ghost:hover{background:transparent;color:var(--accent);border-color:var(--accent)}
+.theme-minimalist .scroll-chev{color:var(--text-soft);left:26.5%}
 .theme-minimalist .reveal{transform:none}
+/* Restrained type scale + tighter rhythm */
+.theme-minimalist .section-head{padding-bottom:clamp(22px,3vw,40px)}
+.theme-minimalist .section-head h2{font-size:clamp(28px,3.4vw,44px)}
+.theme-minimalist .about .eyebrow{margin-bottom:22px}
+.theme-minimalist .about-body{font-size:clamp(18px,2vw,24px)}
+.theme-minimalist .about .btn{margin-top:34px}
+.theme-minimalist .feature-text h2{font-size:clamp(26px,3vw,40px);margin-bottom:18px}
+.theme-minimalist .newsletter h2{font-size:clamp(26px,3.2vw,40px)}
 .theme-minimalist .feature{gap:clamp(30px,5vw,72px);align-items:center}
 .theme-minimalist .feature-text{background:transparent;color:var(--text);padding:clamp(10px,2vw,40px) 0;border-top:1px solid var(--border);border-left:none}
 .theme-minimalist .feature-text .eyebrow{color:var(--text-soft)}
@@ -560,8 +587,10 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
   .infobar-inner{grid-template-columns:1fr;gap:36px}
   .footer-top{flex-direction:column}
   .footer-links{grid-template-columns:repeat(2,auto);gap:12px 40px}
-  .theme-minimalist .hero-inner{padding-top:120px;align-items:flex-end}
-  .theme-minimalist .hero-media::after{background:linear-gradient(180deg,rgba(250,249,246,.5),rgba(250,249,246,.96))}
+  .theme-minimalist .hero{grid-template-columns:1fr;grid-template-rows:auto minmax(300px,1fr)}
+  .theme-minimalist .hero-inner{grid-column:1;grid-row:1;padding:clamp(32px,7vw,52px) var(--gutter)}
+  .theme-minimalist .hero-media{grid-column:1;grid-row:2}
+  .theme-minimalist .scroll-chev{display:none}
   .theme-bento main{grid-template-columns:1fr}
   .theme-bento #hero,.theme-bento #gallery,.theme-bento #about,.theme-bento #menu,
   .theme-bento #events,.theme-bento #locations,.theme-bento #newsletter,
@@ -573,6 +602,8 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
   .switcher-panel{width:min(84vw,290px)}
   .hero-cta{flex-direction:column;width:100%;max-width:320px;margin-left:auto;margin-right:auto}
   .hero-cta .btn{width:100%}
+  .theme-minimalist .hero-cta{margin-left:0;align-items:flex-start}
+  .theme-minimalist .hero-cta .btn-ghost{width:auto}
   .newsletter-form{flex-direction:column}
   .newsletter-form .btn{width:100%}
   .award-badges{gap:20px}
