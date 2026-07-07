@@ -15,6 +15,11 @@ input,select,textarea{font:inherit}
 :root{
   --ease:cubic-bezier(.22,.61,.36,1);
   --nav-h:74px;
+  /* Shared content rail — header, carousels and the minimalist hero all
+     align their left/right edges to this. */
+  --header-maxw:1400px;
+  --header-pad:clamp(18px,4vw,44px);
+  --rail:calc(var(--header-pad) + max(0px,(100vw - var(--header-maxw)) / 2));
 }
 
 body{
@@ -130,7 +135,7 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
   border-bottom:1px solid transparent;
 }
 .header-inner{
-  width:100%;max-width:1400px;margin:0 auto;padding:0 clamp(18px,4vw,44px);
+  width:100%;max-width:var(--header-maxw);margin:0 auto;padding:0 var(--header-pad);
   display:flex;align-items:center;justify-content:space-between;gap:24px;
 }
 .wordmark{
@@ -201,7 +206,7 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
 /* ================================================================
    GALLERY / CAROUSEL
    ================================================================ */
-.carousel{position:relative;max-width:1560px;margin:0 auto;padding:0 clamp(12px,3vw,44px)}
+.carousel{position:relative;max-width:var(--header-maxw);margin:0 auto;padding:0 var(--header-pad)}
 .carousel-track{
   display:flex;gap:16px;overflow-x:auto;scroll-behavior:smooth;
   scroll-snap-type:x mandatory;padding:8px 4px 20px;scrollbar-width:none;cursor:grab;
@@ -423,7 +428,8 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
 .theme-minimalist .hero-inner{
   grid-column:1;grid-row:1;max-width:none;width:100%;margin:0;
   display:flex;align-items:center;
-  padding:clamp(28px,4vw,56px) clamp(28px,5vw,88px);
+  /* left edge sits on the shared rail, flush with the header wordmark */
+  padding:clamp(28px,4vw,56px) clamp(28px,4vw,72px) clamp(28px,4vw,56px) var(--rail);
 }
 .theme-minimalist .hero .hero-text{max-width:560px}
 /* the H1 already reads "Lower East Side, Japanese-Styled" — drop the duplicate kicker */
@@ -440,7 +446,7 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
   border-radius:0;padding:8px 2px;letter-spacing:.12em;
 }
 .theme-minimalist .hero .btn-ghost:hover{background:transparent;color:var(--accent);border-color:var(--accent)}
-.theme-minimalist .scroll-chev{color:var(--text-soft);left:26.5%}
+.theme-minimalist .scroll-chev{color:var(--text-soft);left:calc(var(--rail) + 280px)}
 .theme-minimalist .reveal{transform:none}
 /* Restrained type scale + tighter rhythm */
 .theme-minimalist .section-head{padding-bottom:clamp(22px,3vw,40px)}
@@ -502,7 +508,7 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
 /* ================================================================
    THEME OVERRIDES — BENTO
    ================================================================ */
-.theme-bento main{max-width:1320px;margin:0 auto;padding:calc(var(--nav-h) + 20px) var(--gutter) 40px;
+.theme-bento main{max-width:var(--header-maxw);margin:0 auto;padding:calc(var(--nav-h) + 20px) var(--header-pad) 40px;
   display:grid;grid-template-columns:repeat(12,1fr);gap:var(--bento-gap);grid-auto-flow:row dense}
 .theme-bento .section{padding:clamp(28px,3vw,44px);background:var(--surface);border-radius:var(--radius);
   box-shadow:var(--shadow);overflow:hidden;position:relative;min-height:0;border:1px solid var(--border)}
@@ -588,7 +594,7 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
   .footer-top{flex-direction:column}
   .footer-links{grid-template-columns:repeat(2,auto);gap:12px 40px}
   .theme-minimalist .hero{grid-template-columns:1fr;grid-template-rows:auto minmax(300px,1fr)}
-  .theme-minimalist .hero-inner{grid-column:1;grid-row:1;padding:clamp(32px,7vw,52px) var(--gutter)}
+  .theme-minimalist .hero-inner{grid-column:1;grid-row:1;padding:clamp(32px,7vw,52px) var(--rail)}
   .theme-minimalist .hero-media{grid-column:1;grid-row:2}
   .theme-minimalist .scroll-chev{display:none}
   .theme-bento main{grid-template-columns:1fr}
