@@ -38,6 +38,9 @@ jobs:
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
+        with:
+          # Create the Pages site (source: GitHub Actions) on first run
+          enablement: true
 
       - name: Build
         env:
