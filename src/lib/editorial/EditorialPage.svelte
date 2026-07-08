@@ -931,6 +931,11 @@
 		letter-spacing: 0.5px; color: #fff;
 	}
 	.award-copy { color: rgba(255, 255, 255, 0.75); max-width: 52ch; margin: 0 auto; }
+	@media (max-width: 575.98px) {
+		/* Balance the four year badges into a 2×2 block instead of a 3 + 1 orphan row. */
+		.award-badges { max-width: 264px; margin-left: auto; margin-right: auto; gap: 14px; }
+		.award-badge { width: calc(50% - 7px); }
+	}
 
 	/* ---------- hours / location / ctas ---------- */
 	.info-row { display: flex; flex-wrap: wrap; }

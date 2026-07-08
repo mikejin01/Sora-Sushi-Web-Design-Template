@@ -2298,6 +2298,11 @@
 		.il-page {
 			font-size: 16px;
 		}
+		/* Tighten the storybook vertical rhythm on phones so there's less dead
+		   space to scroll past between sections. */
+		.il-section {
+			padding: clamp(52px, 13vw, 76px) var(--rail);
+		}
 		.il-pillars {
 			grid-template-columns: repeat(2, 1fr);
 			gap: 26px;

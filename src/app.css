@@ -477,8 +477,10 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
   .nav-open .nav{transform:translateX(0)}
   .nav a:not(.btn),.nav button:not(.btn){font-size:16px}
   .nav .btn{margin-top:8px}
-  .site-header{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px)}
-  .theme-editorial .site-header{background:rgba(11,11,12,.8)}
+  /* On mobile the header stays near-opaque so page content never ghosts
+     through it while scrolling. Also target .scrolled so it wins on specificity. */
+  .site-header,.site-header.scrolled{background:color-mix(in srgb,var(--bg) 97%,transparent);backdrop-filter:blur(10px) saturate(1.15);-webkit-backdrop-filter:blur(10px) saturate(1.15)}
+  .theme-editorial .site-header,.theme-editorial .site-header.scrolled{background:rgba(11,11,12,.92)}
   .feature{grid-template-columns:1fr}
   .feature-b .feature-photo{order:0}
   .feature-photo{min-height:300px}
@@ -492,6 +494,9 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
   .theme-minimalist .scroll-chev{display:none}
 }
 @media(max-width:560px){
+  /* Tighten the serene vertical rhythm on phones — desktop-scale section
+     padding leaves too much dead space to scroll through on a small screen. */
+  .theme-minimalist{--section-pad:clamp(50px,11vw,72px)}
   .switcher-toggle .sw-labels{display:none}
   .switcher-panel{width:min(84vw,290px)}
   .hero-cta{flex-direction:column;width:100%;max-width:320px;margin-left:auto;margin-right:auto}

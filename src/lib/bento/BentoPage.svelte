@@ -287,6 +287,7 @@
 
 	<!-- ============================== FOOTER ============================== -->
 	<footer class="bt-footer">
+	  <div class="bt-footer-card">
 		<div class="bt-footer-inner">
 			<div class="bt-footer-brand">
 				<a href="#top" class="bt-wordmark">{BRAND}</a>
@@ -325,6 +326,7 @@
 				<a href="#" onclick={(e) => e.preventDefault()}>Your Privacy Choices</a>
 			</div>
 		</div>
+	  </div>
 	</footer>
 </div>
 
@@ -1176,9 +1178,14 @@
 	   ================================================================ */
 	.bt-footer {
 		max-width: var(--maxw);
-		margin: clamp(28px, 4vw, 52px) auto 0;
-		padding: clamp(32px, 4vw, 52px) var(--rail) 36px;
-		border-top: 1px solid var(--line);
+		margin: 0 auto;
+		padding: var(--gap) var(--rail) clamp(24px, 5vw, 44px);
+	}
+	.bt-footer-card {
+		background: var(--tile);
+		border: 1px solid var(--line);
+		border-radius: var(--r-lg);
+		padding: clamp(30px, 4vw, 52px) clamp(26px, 3.4vw, 48px) clamp(26px, 3vw, 40px);
 	}
 	.bt-footer-inner {
 		display: grid;
