@@ -80,7 +80,6 @@ body{
   --border:rgba(0,0,0,.08); --border-strong:rgba(0,0,0,.16);
   --radius:24px; --radius-lg:28px; --btn-radius:980px; --field-radius:14px;
   --maxw:1220px; --gutter:clamp(16px,3.5vw,40px); --section-pad:0px;
-  --bento-gap:clamp(12px,1.4vw,18px);
   --font-display:'Inter',sans-serif; --font-body:'Inter',sans-serif;
   --h-transform:none; --h-spacing:-.02em; --h-weight:700; --h-lh:1.05;
   --eyebrow-spacing:.02em;
@@ -122,9 +121,6 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
 
 .section{padding-top:var(--section-pad);padding-bottom:var(--section-pad);position:relative}
 
-.illus{display:none}
-.theme-illustrative .illus{display:block}
-
 /* ================================================================
    HEADER / NAV
    ================================================================ */
@@ -142,19 +138,16 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
   font-family:var(--font-display);font-size:clamp(20px,2.2vw,26px);font-weight:600;
   letter-spacing:.34em;text-transform:uppercase;padding-left:.34em;
 }
-.theme-bento .wordmark{letter-spacing:.14em;font-weight:800}
 .theme-illustrative .wordmark{letter-spacing:.14em}
 .nav{display:flex;align-items:center;gap:clamp(14px,1.8vw,30px)}
 .nav a:not(.btn),.nav button:not(.btn){
   font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
   color:var(--text);opacity:.82;transition:opacity .2s,color .2s;
 }
-.theme-bento .nav a:not(.btn),.theme-bento .nav button:not(.btn){letter-spacing:.01em;text-transform:none;font-size:14px;opacity:.9}
 .theme-illustrative .nav a:not(.btn),.theme-illustrative .nav button:not(.btn){letter-spacing:.08em;text-transform:none;font-size:15px}
 .nav a:not(.btn):hover,.nav button:not(.btn):hover{opacity:1;color:var(--accent)}
 .nav-utility{font-size:11px !important;opacity:.55 !important}
 .nav .btn{padding:11px 22px}
-.theme-bento .nav .btn{padding:9px 18px;letter-spacing:0;text-transform:none;font-size:14px}
 
 .site-header.scrolled{
   height:64px;
@@ -197,7 +190,6 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
 .hero-cta{margin-top:40px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 .hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.55)}
 .hero .btn-ghost:hover{background:#fff;color:#111}
-.hero-illus{position:absolute;inset:0;z-index:2;pointer-events:none}
 
 .scroll-chev{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:4;color:#fff;opacity:.85;animation:bob 2.2s var(--ease) infinite}
 .scroll-chev svg{width:26px;height:26px}
@@ -239,7 +231,6 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
 .about-inner{max-width:820px;margin:0 auto;padding:0 var(--gutter)}
 .about .eyebrow{display:block;margin-bottom:30px;font-size:clamp(12px,1.4vw,15px);letter-spacing:.2em;line-height:1.6}
 .about-body{font-family:var(--font-display);font-size:clamp(19px,2.2vw,27px);line-height:1.62;color:var(--text-soft);font-weight:300;letter-spacing:.01em}
-.theme-bento .about-body{font-family:var(--font-body);font-weight:400;font-size:clamp(17px,1.7vw,21px)}
 .about .btn{margin-top:42px}
 
 /* ================================================================
@@ -468,111 +459,13 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
 .theme-minimalist .award-badge{color:var(--text-soft)}
 .theme-minimalist .btn-primary{color:#fff}
 
-/* ================================================================
-   THEME OVERRIDES — ILLUSTRATIVE
-   ================================================================ */
-.theme-illustrative .hero{background:var(--bg);flex-direction:column;gap:10px;padding-top:calc(var(--nav-h) + 30px)}
-.theme-illustrative .hero-media{inset:auto;position:relative;width:min(440px,72vw);height:min(560px,64vh);margin:0 auto;border-radius:260px 260px 18px 18px;overflow:hidden;border:3px solid var(--accent);box-shadow:var(--shadow)}
-.theme-illustrative .hero-media::after{background:linear-gradient(180deg,transparent 55%,rgba(32,33,28,.35))}
-.theme-illustrative .hero-inner{order:-1;padding-bottom:6px}
-.theme-illustrative .hero .eyebrow{color:var(--accent);opacity:1}
-.theme-illustrative .hero-title{color:var(--text);text-shadow:none;font-style:normal;font-size:clamp(52px,10vw,132px)}
-.theme-illustrative .hero-title .hand{font-family:var(--font-hand);color:var(--accent);font-weight:700;text-transform:none;letter-spacing:0;display:inline-block;transform:rotate(-4deg)}
-.theme-illustrative .hero-welcome{color:var(--text-soft)}
-.theme-illustrative .hero .btn-ghost{color:var(--text);border-color:var(--accent)}
-.theme-illustrative .hero .btn-ghost:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
-.theme-illustrative .scroll-chev{color:var(--accent)}
-.theme-illustrative .hero-illus .m{position:absolute;color:var(--accent);opacity:.5}
-.theme-illustrative .hero-illus .crane{top:16%;right:8%;width:130px;color:var(--accent-2)}
-.theme-illustrative .hero-illus .wave-h{bottom:0;left:0;right:0;width:100%;color:var(--accent);opacity:.4}
-.theme-illustrative .hero-illus .sprig{top:22%;left:6%;width:90px;color:var(--accent-2);opacity:.55}
-.theme-illustrative .feature{gap:clamp(24px,4vw,56px);align-items:center}
-.theme-illustrative .feature-text{background:var(--surface);color:var(--text);border:2px solid var(--accent);border-radius:var(--radius-lg)}
-.theme-illustrative .feature-text .eyebrow{color:var(--accent);opacity:1}
-.theme-illustrative .feature-text h2{color:var(--text)}
-.theme-illustrative .feature-text p{color:var(--text-soft)}
-.theme-illustrative .feature-text .btn{background:var(--accent);color:#fff;border-color:var(--accent)}
-.theme-illustrative .feature-text .btn:hover{background:var(--accent-2);border-color:var(--accent-2)}
-.theme-illustrative .feature-b .feature-text{border-color:var(--accent-2)}
-.theme-illustrative .feature-photo{border-radius:180px 180px var(--radius-lg) var(--radius-lg);border:3px solid var(--accent-3)}
-.theme-illustrative .feature-corner{position:absolute;width:52px;height:52px;color:var(--accent-3)}
-.theme-illustrative .feature-corner.tl{top:-14px;left:-14px}
-.theme-illustrative .feature-corner.br{bottom:-14px;right:-14px;transform:rotate(180deg)}
-.theme-illustrative .gallery-item{border:2px solid var(--accent);border-radius:20px}
-.theme-illustrative .gallery-item.branded{background:var(--accent-2);color:#fff;border-color:var(--accent-2)}
-.theme-illustrative .loc-card{border:2px solid var(--accent);border-radius:20px}
-.theme-illustrative .award-badge{color:var(--accent)}
-.theme-illustrative .btn-primary{color:#fff}
-.theme-illustrative .site-footer{background:var(--bg-alt)}
+/* Illustrative theme has its own component tree — see
+   src/lib/illustrative/IllustrativePage.svelte. The .theme-illustrative token
+   block above still powers the shared reservation modal + style switcher. */
 
-/* ================================================================
-   THEME OVERRIDES — BENTO
-   ================================================================ */
-.theme-bento main{max-width:var(--header-maxw);margin:0 auto;padding:calc(var(--nav-h) + 20px) var(--header-pad) 40px;
-  display:grid;grid-template-columns:repeat(12,1fr);gap:var(--bento-gap);grid-auto-flow:row dense}
-.theme-bento .section{padding:clamp(28px,3vw,44px);background:var(--surface);border-radius:var(--radius);
-  box-shadow:var(--shadow);overflow:hidden;position:relative;min-height:0;border:1px solid var(--border)}
-.theme-bento .reveal{transform:translateY(16px)}
-.theme-bento #hero{grid-column:span 12}
-.theme-bento #gallery{grid-column:span 12}
-.theme-bento #about{grid-column:span 7}
-.theme-bento #menu{grid-column:span 5}
-.theme-bento #events{grid-column:span 6}
-.theme-bento #locations{grid-column:span 6}
-.theme-bento #newsletter{grid-column:span 6}
-.theme-bento #awards{grid-column:span 6}
-.theme-bento #contact{grid-column:span 12}
-.theme-bento .hero{min-height:clamp(440px,54vh,600px);padding:0;border-radius:var(--radius);color:#fff}
-.theme-bento .hero-media::after{background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.7))}
-.theme-bento .hero-inner{padding:clamp(30px,5vw,64px)}
-.theme-bento .hero-title{font-family:var(--font-body);font-weight:700;letter-spacing:-.03em;font-size:clamp(44px,8vw,104px)}
-.theme-bento .hero .eyebrow{color:#fff;opacity:.85}
-.theme-bento .hero-cta .btn{border-radius:980px;text-transform:none;letter-spacing:0}
-.theme-bento .hero .btn-primary{background:#fff;color:#111;border-color:#fff}
-.theme-bento .hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.6)}
-.theme-bento #gallery .carousel{padding:0;max-width:none}
-.theme-bento #gallery .carousel-track{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--bento-gap);overflow:visible;padding:0;cursor:default}
-.theme-bento #gallery .gallery-item{flex:none;width:auto;aspect-ratio:1;border-radius:16px}
-.theme-bento #gallery .carousel-btn{display:none}
-.theme-bento .section-head{padding:0 0 22px;text-align:left}
-.theme-bento .section-head h2{font-size:clamp(24px,2.6vw,36px)}
-.theme-bento .about{text-align:left}
-.theme-bento .about-inner{max-width:none;padding:0}
-.theme-bento .about .eyebrow{margin-bottom:18px}
-.theme-bento .feature{padding:0;max-width:none;grid-template-columns:1fr;gap:0;height:100%}
-.theme-bento .feature-photo{border-radius:16px;height:clamp(220px,24vw,300px);min-height:0;margin-bottom:22px;order:0 !important}
-.theme-bento .feature-photo img{height:100%}
-.theme-bento .feature-b .feature-photo{order:0}
-.theme-bento .feature-text{background:transparent;color:var(--text);padding:0}
-.theme-bento .feature-text .eyebrow{color:var(--accent-2)}
-.theme-bento .feature-text h2{color:var(--text);font-family:var(--font-body);font-size:clamp(26px,3vw,38px)}
-.theme-bento .feature-text p{color:var(--text-soft)}
-.theme-bento .feature-text .btn{background:none;color:var(--accent);border:none;padding:0;letter-spacing:0;text-transform:none;font-size:15px;font-weight:500}
-.theme-bento .feature-text .btn:hover{background:none;color:var(--accent);text-decoration:underline}
-.theme-bento #locations .carousel{padding:0;max-width:none}
-.theme-bento #locations .carousel-btn{display:none}
-.theme-bento .loc-card{flex:0 0 clamp(180px,44%,220px);border-radius:16px}
-.theme-bento .newsletter,.theme-bento .awards,.theme-bento .infobar{background:var(--surface);text-align:left}
-.theme-bento .newsletter-inner{max-width:none;padding:0}
-.theme-bento .newsletter-form{margin:0}
-.theme-bento .awards-inner{max-width:none;padding:0}
-.theme-bento .award-badges{justify-content:flex-start;gap:22px;margin-bottom:26px}
-.theme-bento .award-badge{color:var(--accent-2);width:74px}
-.theme-bento .award-badge svg{width:56px;height:56px}
-.theme-bento .awards h2,.theme-bento .newsletter h2{text-align:left;font-size:clamp(22px,2.4vw,32px)}
-.theme-bento .awards p{margin:0}
-.theme-bento .infobar-inner{padding:0;gap:30px}
-.theme-bento .btn-primary{color:#fff}
-.theme-bento #menu{background:linear-gradient(160deg,#1d1d1f,#2b2b2e);color:#fff;border:none}
-.theme-bento #menu .feature-text h2,.theme-bento #menu .feature-text p{color:#fff}
-.theme-bento #menu .feature-text p{opacity:.8}
-.theme-bento #menu .feature-text .btn{color:#4aa3ff}
-.theme-bento #newsletter{background:linear-gradient(160deg,#c8322a,#9c241d);color:#fff;border:none}
-.theme-bento #newsletter h2{color:#fff}
-.theme-bento #newsletter .n-sub,.theme-bento #newsletter .consent{color:rgba(255,255,255,.8)}
-.theme-bento #newsletter input{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);color:#fff}
-.theme-bento #newsletter input::placeholder{color:rgba(255,255,255,.7)}
-.theme-bento #newsletter .btn-primary{background:#fff;color:#c8322a;border-color:#fff}
+/* Bento theme has its own component tree — see src/lib/bento/BentoPage.svelte.
+   The .theme-bento token block above still powers the shared reservation modal +
+   style switcher swatch while that theme is active. */
 
 /* ================================================================
    RESPONSIVE
@@ -597,11 +490,6 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
   .theme-minimalist .hero-inner{grid-column:1;grid-row:1;padding:clamp(32px,7vw,52px) var(--rail)}
   .theme-minimalist .hero-media{grid-column:1;grid-row:2}
   .theme-minimalist .scroll-chev{display:none}
-  .theme-bento main{grid-template-columns:1fr}
-  .theme-bento #hero,.theme-bento #gallery,.theme-bento #about,.theme-bento #menu,
-  .theme-bento #events,.theme-bento #locations,.theme-bento #newsletter,
-  .theme-bento #awards,.theme-bento #contact{grid-column:1 / -1}
-  .theme-bento #gallery .carousel-track{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:560px){
   .switcher-toggle .sw-labels{display:none}
@@ -613,7 +501,6 @@ h1,h2,h3{font-family:var(--font-display);font-weight:var(--h-weight);line-height
   .newsletter-form{flex-direction:column}
   .newsletter-form .btn{width:100%}
   .award-badges{gap:20px}
-  .theme-illustrative .feature-photo{border-radius:120px 120px 20px 20px}
   .form-grid{grid-template-columns:1fr}
 }
 

@@ -1,6 +1,8 @@
 <script>
 	import { themeState } from '$lib/theme.svelte.js';
 	import EditorialPage from '$lib/editorial/EditorialPage.svelte';
+	import IllustrativePage from '$lib/illustrative/IllustrativePage.svelte';
+	import BentoPage from '$lib/bento/BentoPage.svelte';
 	import Header from '$lib/components/Header.svelte';
 	import Hero from '$lib/components/Hero.svelte';
 	import Gallery from '$lib/components/Gallery.svelte';
@@ -21,6 +23,12 @@
 {#if themeState.current === 'editorial'}
 	<!-- Editorial = polished venue-site template with its own component tree -->
 	<EditorialPage />
+{:else if themeState.current === 'illustrative'}
+	<!-- Illustrative = hand-crafted storybook template with its own component tree -->
+	<IllustrativePage />
+{:else if themeState.current === 'bento'}
+	<!-- Bento = Apple-Store-style modular tiles with its own component tree -->
+	<BentoPage />
 {:else}
 	<Header />
 
