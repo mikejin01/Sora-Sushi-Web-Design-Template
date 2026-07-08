@@ -161,21 +161,19 @@
 
 		<!-- ============================== FEATURES ============================== -->
 		<section class="bt-features" use:reveal>
-			<!-- Menu — split tile (dark text panel + dish photo) -->
-			<article class="bt-feat bt-feat-menu" id="menu">
-				<div class="bt-feat-copy">
+			<!-- Menu — full-bleed photo tile -->
+			<article class="bt-feat" id="menu">
+				<img class="bt-feat-bg" src={FEATURE_A.img} alt={FEATURE_A.alt} loading="lazy" />
+				<div class="bt-feat-overlay">
 					<p class="bt-eyebrow bt-on-dark">{FEATURE_A.eyebrow}</p>
 					<h2 class="bt-feat-title">{FEATURE_A.title}</h2>
-					<p class="bt-feat-body">{FEATURE_A.body}</p>
-					<a href="#gallery" class="bt-link bt-link-blue">{FEATURE_A.cta} <span aria-hidden="true">›</span></a>
-				</div>
-				<div class="bt-feat-media">
-					<img src={FEATURE_A.img} alt={FEATURE_A.alt} loading="lazy" />
+					<p class="bt-feat-body bt-on-dark">{FEATURE_A.body}</p>
+					<a href="#gallery" class="bt-btn bt-btn-light bt-btn-sm">{FEATURE_A.cta}</a>
 				</div>
 			</article>
 
-			<!-- Events — overlay tile (photo + bottom gradient) -->
-			<article class="bt-feat bt-feat-events" id="events">
+			<!-- Events — full-bleed photo tile -->
+			<article class="bt-feat" id="events">
 				<img class="bt-feat-bg" src={FEATURE_B.img} alt={FEATURE_B.alt} loading="lazy" />
 				<div class="bt-feat-overlay">
 					<p class="bt-eyebrow bt-on-dark">{FEATURE_B.eyebrow}</p>
@@ -235,29 +233,54 @@
 
 			<!-- Awards -->
 			<div class="bt-tile bt-awards">
+				<span class="bt-medal" aria-hidden="true">
+					<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M17 27 L11.5 44 L24 36.5 L36.5 44 L31 27" />
+						<circle cx="24" cy="18" r="12.5" />
+						<path d="M24 11.5l2 4.1 4.5.6-3.3 3.1.8 4.5-4-2.2-4 2.2.8-4.5-3.3-3.1 4.5-.6z" fill="currentColor" stroke="none" />
+					</svg>
+				</span>
+				<h3 class="bt-awards-title">{AWARDS.title}</h3>
+				<p class="bt-awards-body">{AWARDS.body}</p>
 				<div class="bt-award-years">
 					{#each AWARDS.years as year}
 						<span class="bt-award-year">{year}</span>
 					{/each}
 				</div>
-				<h3 class="bt-awards-title">{AWARDS.title}</h3>
-				<p class="bt-awards-body">{AWARDS.body}</p>
 			</div>
 
-			<!-- Contact / hours -->
+			<!-- Contact / hours — full-width info bar -->
 			<div class="bt-tile bt-contact" id="contact">
-				<div class="bt-contact-col">
-					<h4>Hours</h4>
-					<ul>
-						{#each HOURS as line}<li>{line}</li>{/each}
-					</ul>
+				<div class="bt-contact-block">
+					<span class="bt-contact-icon" aria-hidden="true">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3.5 2" /></svg>
+					</span>
+					<div class="bt-contact-body">
+						<h4>Hours</h4>
+						<ul class="bt-hours">
+							{#each HOURS as line}
+								<li><span class="bt-hours-day">{line.split(' · ')[0]}</span><span class="bt-hours-time">{line.split(' · ')[1]}</span></li>
+							{/each}
+						</ul>
+					</div>
 				</div>
-				<div class="bt-contact-col">
-					<h4>Find us</h4>
-					<p>{LOCATION.address[0]}<br />{LOCATION.address[1]}</p>
-					<p><a class="bt-link-blue" href={`tel:${LOCATION.phone.replace(/\./g, '')}`}>{LOCATION.phone}</a></p>
+				<div class="bt-contact-block">
+					<span class="bt-contact-icon" aria-hidden="true">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5-6 8-9.5 8-13a8 8 0 1 0-16 0c0 3.5 3 7 8 13z" /><circle cx="12" cy="9" r="2.6" /></svg>
+					</span>
+					<div class="bt-contact-body">
+						<h4>Find us</h4>
+						<p>{LOCATION.address[0]}<br />{LOCATION.address[1]}</p>
+						<div class="bt-contact-links">
+							<a class="bt-link-accent" href="#locations">Get directions</a>
+							<a class="bt-link-accent" href={`tel:${LOCATION.phone.replace(/\./g, '')}`}>{LOCATION.phone}</a>
+						</div>
+					</div>
 				</div>
-				<button class="bt-btn bt-btn-primary bt-btn-block" onclick={openReservation}>Make a Reservation</button>
+				<div class="bt-contact-cta">
+					<p>A table awaits.</p>
+					<button class="bt-btn bt-btn-primary" onclick={openReservation}>Make a Reservation</button>
+				</div>
 			</div>
 		</section>
 	</main>
@@ -309,7 +332,7 @@
 	/* =====================================================================
 	   BENTO — scoped design system. Everything namespaced bt-* so app.css
 	   primitives can't leak in. Apple-Store-inspired: light gray field,
-	   rounded tiles, tight sans-serif type, blue accent, pill CTAs.
+	   rounded tiles, tight sans-serif type, one vermilion accent, pill CTAs.
 	   ===================================================================== */
 	.bt-page {
 		--bg: #f5f5f7;
@@ -319,12 +342,10 @@
 		--faint: #86868b;
 		--line: rgba(0, 0, 0, 0.08);
 		--line-strong: rgba(0, 0, 0, 0.14);
-		--blue: #0071e3;
-		--blue-deep: #0058b9;
+		/* single brand accent — vermilion / lacquer red */
+		--accent: #c22f27;
+		--accent-deep: #97211a;
 		--dark: #1d1d1f;
-		--dark-2: #2b2b2e;
-		--red: #c8322a;
-		--red-deep: #9c241d;
 
 		--r: 20px;
 		--r-lg: 28px;
@@ -350,7 +371,7 @@
 	.bt-page a:focus-visible,
 	.bt-page button:focus-visible,
 	.bt-page input:focus-visible {
-		outline: 2px solid var(--blue);
+		outline: 2px solid var(--accent);
 		outline-offset: 2px;
 	}
 
@@ -360,7 +381,7 @@
 		font-weight: 600;
 		letter-spacing: 0.02em;
 		text-transform: none;
-		color: var(--blue);
+		color: var(--accent);
 		margin: 0 0 10px;
 	}
 	.bt-eyebrow.bt-on-dark {
@@ -408,11 +429,11 @@
 		width: 100%;
 	}
 	.bt-btn-primary {
-		background: var(--blue);
+		background: var(--accent);
 		color: #fff;
 	}
 	.bt-btn-primary:hover {
-		background: var(--blue-deep);
+		background: var(--accent-deep);
 	}
 	.bt-btn-light {
 		background: #fff;
@@ -448,10 +469,10 @@
 	.bt-link:hover span {
 		transform: translateX(3px);
 	}
-	.bt-link-blue {
-		color: var(--blue);
+	.bt-link-accent {
+		color: var(--accent);
 	}
-	.bt-link-blue:hover {
+	.bt-link-accent:hover {
 		text-decoration: underline;
 	}
 
@@ -517,7 +538,7 @@
 	}
 	.bt-nav a:not(.bt-btn):hover {
 		opacity: 1;
-		color: var(--blue);
+		color: var(--accent);
 	}
 	.bt-nav-utility {
 		opacity: 0.5 !important;
@@ -749,7 +770,7 @@
 
 	/* brand tile */
 	.bt-brand {
-		background: linear-gradient(150deg, var(--blue), #005bbf);
+		background: linear-gradient(150deg, var(--accent), var(--accent-deep));
 		color: #fff;
 		border-color: transparent;
 		display: flex;
@@ -839,48 +860,6 @@
 		overflow: hidden;
 		min-height: clamp(400px, 42vw, 500px);
 		position: relative;
-	}
-	/* menu = split */
-	.bt-feat-menu {
-		display: grid;
-		grid-template-rows: 1fr auto;
-		background: linear-gradient(160deg, var(--dark), var(--dark-2));
-		color: #fff;
-	}
-	.bt-feat-copy {
-		padding: clamp(26px, 3vw, 40px);
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-	}
-	.bt-feat-title {
-		font-size: clamp(24px, 2.6vw, 34px);
-		font-weight: 650;
-		letter-spacing: -0.03em;
-		line-height: 1.08;
-		margin: 0 0 14px;
-	}
-	.bt-feat-body {
-		font-size: 15.5px;
-		line-height: 1.5;
-		color: rgba(255, 255, 255, 0.72);
-		max-width: 42ch;
-		margin: 0 0 20px;
-	}
-	.bt-feat-menu .bt-feat-media {
-		height: clamp(190px, 20vw, 240px);
-	}
-	.bt-feat-media img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		transition: transform 0.7s var(--ease);
-	}
-	.bt-feat-menu:hover .bt-feat-media img {
-		transform: scale(1.04);
-	}
-	/* events = overlay */
-	.bt-feat-events {
 		color: #fff;
 	}
 	.bt-feat-bg {
@@ -891,7 +870,7 @@
 		object-fit: cover;
 		transition: transform 0.8s var(--ease);
 	}
-	.bt-feat-events:hover .bt-feat-bg {
+	.bt-feat:hover .bt-feat-bg {
 		transform: scale(1.05);
 	}
 	.bt-feat-overlay {
@@ -901,11 +880,28 @@
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: flex-end;
-		padding: clamp(26px, 3vw, 40px);
-		background: linear-gradient(0deg, rgba(0, 0, 0, 0.72) 8%, rgba(0, 0, 0, 0.1) 55%, transparent 80%);
+		padding: clamp(28px, 3vw, 44px);
+		background: linear-gradient(
+			5deg,
+			rgba(0, 0, 0, 0.85) 2%,
+			rgba(0, 0, 0, 0.5) 38%,
+			rgba(0, 0, 0, 0.08) 74%,
+			transparent 100%
+		);
 	}
-	.bt-feat-overlay .bt-feat-body {
-		max-width: 38ch;
+	.bt-feat-title {
+		font-size: clamp(26px, 2.9vw, 38px);
+		font-weight: 650;
+		letter-spacing: -0.03em;
+		line-height: 1.06;
+		margin: 0 0 12px;
+	}
+	.bt-feat-body {
+		font-size: 15.5px;
+		line-height: 1.5;
+		color: rgba(255, 255, 255, 0.86);
+		max-width: 42ch;
+		margin: 0 0 22px;
 	}
 
 	/* ================================================================
@@ -961,15 +957,15 @@
 	}
 	.bt-news {
 		grid-column: 1 / 8;
-		grid-row: 1 / 3;
-		background: linear-gradient(155deg, var(--red), var(--red-deep));
+		grid-row: 1;
+		background: linear-gradient(155deg, var(--accent), var(--accent-deep));
 		color: #fff;
 		border-color: transparent;
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-start;
-		gap: clamp(18px, 2.2vw, 28px);
-		padding: clamp(28px, 3.4vw, 46px);
+		justify-content: center;
+		gap: clamp(18px, 2.2vw, 26px);
+		padding: clamp(30px, 3.6vw, 48px);
 	}
 	.bt-news-title {
 		font-size: clamp(26px, 3vw, 40px);
@@ -994,22 +990,30 @@
 		min-width: 0;
 		padding: 13px 18px;
 		border-radius: var(--pill);
-		border: 1px solid rgba(255, 255, 255, 0.35);
-		background: rgba(255, 255, 255, 0.14);
+		border: 1px solid rgba(255, 255, 255, 0.45);
+		background: rgba(255, 255, 255, 0.16);
 		color: #fff;
 		font-size: 15px;
+		transition:
+			background-color 0.2s var(--ease),
+			border-color 0.2s var(--ease);
 	}
 	.bt-news-form input::placeholder {
-		color: rgba(255, 255, 255, 0.72);
+		color: rgba(255, 255, 255, 0.78);
+	}
+	.bt-news-form input:focus {
+		outline: none;
+		background: rgba(255, 255, 255, 0.24);
+		border-color: rgba(255, 255, 255, 0.85);
 	}
 	.bt-news-form .bt-btn-light {
-		color: var(--red-deep);
+		color: var(--accent-deep);
 	}
 	.bt-news-consent {
 		font-size: 12.5px;
 		line-height: 1.4;
 		color: rgba(255, 255, 255, 0.68);
-		margin: auto 0 0;
+		margin: 0;
 	}
 	.bt-err {
 		color: #ffe0dc;
@@ -1042,19 +1046,15 @@
 		display: flex;
 		flex-direction: column;
 	}
-	.bt-award-years {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 8px;
+	.bt-medal {
+		width: 46px;
+		height: 46px;
+		color: var(--accent);
 		margin-bottom: 16px;
 	}
-	.bt-award-year {
-		font-size: 13px;
-		font-weight: 600;
-		color: var(--red);
-		padding: 5px 12px;
-		border: 1px solid color-mix(in srgb, var(--red) 30%, transparent);
-		border-radius: var(--pill);
+	.bt-medal svg {
+		width: 100%;
+		height: 100%;
 	}
 	.bt-awards-title {
 		font-size: clamp(19px, 2vw, 24px);
@@ -1069,34 +1069,106 @@
 		color: var(--soft);
 		margin: 0;
 	}
+	.bt-award-years {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: auto;
+		padding-top: 20px;
+	}
+	.bt-award-year {
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--accent);
+		padding: 5px 12px;
+		border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+		border-radius: var(--pill);
+	}
 
 	.bt-contact {
-		grid-column: 8 / 13;
+		grid-column: 1 / 13;
 		grid-row: 2;
-		padding: clamp(24px, 2.6vw, 34px);
+		padding: clamp(26px, 2.8vw, 38px) clamp(28px, 3.2vw, 44px);
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 22px 24px;
-		align-content: start;
+		grid-template-columns: auto auto 1fr;
+		gap: clamp(28px, 4vw, 72px);
+		align-items: center;
 	}
-	.bt-contact-col h4 {
+	.bt-contact-block {
+		display: flex;
+		gap: 14px;
+		align-items: flex-start;
+	}
+	.bt-contact-icon {
+		width: 38px;
+		height: 38px;
+		flex: none;
+		display: grid;
+		place-items: center;
+		border-radius: 50%;
+		background: color-mix(in srgb, var(--accent) 9%, transparent);
+		color: var(--accent);
+	}
+	.bt-contact-icon svg {
+		width: 19px;
+		height: 19px;
+	}
+	.bt-contact-body h4 {
 		font-size: 12px;
 		font-weight: 600;
-		letter-spacing: 0.02em;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
 		color: var(--faint);
+		margin: 0 0 10px;
+	}
+	.bt-hours {
+		list-style: none;
+		min-width: 216px;
+	}
+	.bt-hours li {
+		display: flex;
+		justify-content: space-between;
+		gap: 24px;
+		font-size: 14px;
+		padding: 3px 0;
+	}
+	.bt-hours-day {
+		color: var(--soft);
+		white-space: nowrap;
+	}
+	.bt-hours-time {
+		color: var(--ink);
+		font-weight: 500;
+		white-space: nowrap;
+	}
+	.bt-contact-body p {
+		font-size: 14.5px;
+		line-height: 1.5;
+		color: var(--ink);
 		margin: 0 0 8px;
 	}
-	.bt-contact-col ul {
-		list-style: none;
+	.bt-contact-links {
+		display: flex;
+		flex-direction: column;
+		gap: 3px;
+		align-items: flex-start;
 	}
-	.bt-contact-col li,
-	.bt-contact-col p {
+	.bt-contact-links a {
 		font-size: 14.5px;
-		line-height: 1.55;
-		color: var(--ink);
 	}
-	.bt-contact .bt-btn-block {
-		grid-column: 1 / -1;
+	.bt-contact-cta {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+		justify-self: end;
+	}
+	.bt-contact-cta p {
+		font-size: 16px;
+		font-weight: 600;
+		letter-spacing: -0.01em;
+		color: var(--ink);
+		margin: 0;
 	}
 
 	/* ================================================================
@@ -1140,8 +1212,8 @@
 			border-color 0.2s;
 	}
 	.bt-footer-social a:hover {
-		color: var(--blue);
-		border-color: var(--blue);
+		color: var(--accent);
+		border-color: var(--accent);
 	}
 	.bt-footer-social svg {
 		width: 18px;
@@ -1167,7 +1239,7 @@
 		transition: color 0.2s;
 	}
 	.bt-footer-col a:hover {
-		color: var(--blue);
+		color: var(--accent);
 	}
 	.bt-footer-legal {
 		display: flex;
@@ -1235,6 +1307,17 @@
 		.bt-contact {
 			grid-column: 1;
 			grid-row: auto;
+		}
+		.bt-contact {
+			grid-template-columns: 1fr;
+			gap: 24px;
+			align-items: stretch;
+		}
+		.bt-contact-cta {
+			justify-self: stretch;
+		}
+		.bt-contact-cta .bt-btn {
+			width: 100%;
 		}
 	}
 	@media (max-width: 680px) {
